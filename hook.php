@@ -47,7 +47,7 @@ $keyboard_tarif = [
     ["Назад"]
 ];
 
-$keyboard_civil_bag = [
+$keyboard_civil_bag_email = [
     ["\xF0\x9F\x93\x83 Да", "Нет"],
     ["Назад"]
 ];
@@ -151,7 +151,7 @@ if($text){
                 case "Yes_civil": {
                     $reply = $lang['civil_text'];
                     UserEvent($chat_id, 'Standart_tarif');
-                    $keyboard = $keyboard_civil_bag;
+                    $keyboard = $keyboard_civil_bag_email;
                     break;
                 }
 
@@ -159,7 +159,7 @@ if($text){
                 case "Yes_baggage": {
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Yes_civil');
-                    $keyboard = $keyboard_civil_bag;
+                    $keyboard = $keyboard_civil_bag_email;
                 }
 
             }
@@ -215,6 +215,18 @@ if($text){
                     $keyboard = $keyboard_work_recreation;
                     break;
                 }
+
+                case "Work":
+                case "Extended_tarif":
+                case "Car_tarif":
+                case "Not_baggage":
+                case "Yes_baggage":{
+                    $reply = $lang['success_text'];
+                    UserEvent($chat_id, 'Success');
+                    OrderEdit($chat_id, 'bithday', $text);
+                    $keyboard = $keyboard_civil_bag_email;
+                    break;
+                }
             }
             break;
         }
@@ -241,7 +253,7 @@ if($text){
             $reply = $lang['civil_text'];
             UserEvent($chat_id, 'Standart_tarif');
             OrderEdit($chat_id, 'tarif', 'Стандарт');
-            $keyboard = $keyboard_civil_bag;
+            $keyboard = $keyboard_civil_bag_email;
 
             break;
         }
@@ -270,7 +282,7 @@ if($text){
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Yes_civil');
                     OrderEdit($chat_id, 'civil', 'Да');
-                    $keyboard = $keyboard_civil_bag;
+                    $keyboard = $keyboard_civil_bag_email;
                     break;
                 }
 
@@ -292,7 +304,7 @@ if($text){
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Not_civil');
                     OrderEdit($chat_id, 'civil', 'Нет');
-                    $keyboard = $keyboard_civil_bag;
+                    $keyboard = $keyboard_civil_bag_email;
                     break;
                 }
 
