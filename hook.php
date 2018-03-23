@@ -15,8 +15,7 @@ $chat_id = $result['message']['chat']['id']; //id user
 $name = $result['message']['from']['username']; //Username
 
 $keyboard = [
-    ["Калькулятор зарплаты","Другие калькуляторы"],
-    ["SpeedБух", "Сайт"],
+    ["\xF0\x9F\x93\x83 Расчитать полис"],
     ["Информация"]
 ]; //keyboard
 
@@ -35,7 +34,8 @@ if($text){
     switch ($text){
 
         case '/start':{
-            $reply = "Здравствуйте, на связи Ваш персональный  бухгалтер конструктор. Жду Ваш вопрос!";
+            $reply = "Добрый день!.<br/> Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV)
+";
 
             UserEvent($chat_id, 'Null');
 
@@ -48,6 +48,7 @@ if($text){
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
                 'text' => $reply,
+                'parse_mode'=> 'HTML',
                 'reply_markup' => $reply_markup
             ]);
 
