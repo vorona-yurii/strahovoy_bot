@@ -82,13 +82,13 @@ if($text){
                 case "Date_back_europe":{
                     $reply = $lang['all_europe_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_Europe');
-                    $keyboard = $keyboard_rp;
+                    $keyboard = $keyboard_inf_back;
                     break;
                 }
                 case "Date_back_world":{
                     $reply = $lang['all_world_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_World');
-                    $keyboard = $keyboard_rp;
+                    $keyboard = $keyboard_inf_back;
                     break;
                 }
 
