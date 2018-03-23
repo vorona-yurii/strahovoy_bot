@@ -79,14 +79,14 @@ if($text){
                     $keyboard = $keyboard_rp;
                     break;
                 }
-                case "Date_back_europe":{
+                case "Date_to_europe":{
                     $reply = $lang['all_europe_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_Europe');
                     OrderEdit($chat_id, 'world', 'Вся Европа');
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
-                case "Date_back_world":{
+                case "Date_to_world":{
                     $reply = $lang['all_world_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_World');
                     OrderEdit($chat_id, 'world', 'Весь мир');
@@ -126,15 +126,24 @@ if($text){
             switch (UserSelect($chat_id)){
                 case "All_World":{
                     $reply = $lang['date_back'];
-                    UserEvent($chat_id, 'Date_back_world');
+                    UserEvent($chat_id, 'Date_to_world');
                     OrderEdit($chat_id, 'date_to', $text);
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
                 case "All_Europe":{
                     $reply = $lang['date_back'];
-                    UserEvent($chat_id, 'Date_back_europe');
+                    UserEvent($chat_id, 'Date_to_europe');
                     OrderEdit($chat_id, 'date_to', $text);
+                    $keyboard = $keyboard_inf_back;
+                    break;
+                }
+
+                case "Date_to_europe":
+                case "Date_to_world":{
+                    $reply = $lang['date_back'];
+                    UserEvent($chat_id, 'Date_back');
+                    OrderEdit($chat_id, 'date_back', $text);
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
