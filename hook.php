@@ -19,6 +19,10 @@ $keyboard_main = [
     ["Информация"]
 ];
 
+$keyboard_inf_back = [
+    ["Информация", "Назад"]
+];
+
 $keyboard_home = [
     ["Домой"]
 ];
@@ -77,6 +81,21 @@ if($text){
             $keyboard = $keyboard_main;
             break;
         }
+
+        case "Вся Европа":{
+            $reply = $lang['all_europe_text'] . $lang['dateto_text'];
+            UserEvent($chat_id, 'All_Europe');
+            $keyboard = $keyboard_inf_back;
+            break;
+        }
+
+        case "Весь мир":{
+            $reply = $lang['all_world_text'] . $lang['dateto_text'];
+            UserEvent($chat_id, 'All_World');
+            $keyboard = $keyboard_inf_back;
+            break;
+        }
+
 
     }
 
