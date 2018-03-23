@@ -291,7 +291,7 @@ if($text){
                 case 'Standart_tarif': {
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Not_civil');
-                    OrderEdit($chat_id, 'civil', 'Да');
+                    OrderEdit($chat_id, 'civil', 'Нет');
                     $keyboard = $keyboard_civil_bag;
                     break;
                 }
@@ -300,7 +300,7 @@ if($text){
                 case 'Not_civil': {
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Not_baggage');
-                    OrderEdit($chat_id, 'baggage', 'Да');
+                    OrderEdit($chat_id, 'baggage', 'Нет');
                     $keyboard = $keyboard_back;
                     break;
                 }
