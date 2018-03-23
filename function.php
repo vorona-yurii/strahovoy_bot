@@ -77,6 +77,23 @@ function UserEvent($user_id, $last_event){
     }
 }
 
+function OrderEdit($user_id, $key, $val){
+
+    if(dbQuery("SELECT * FROM `orders` WHERE user_chat_id = '".$user_id."'")->fetch( PDO::FETCH_COLUMN ) == NULL) {
+        dbQuery("INSERT INTO `orders` (`user_chat_id`) VALUES ('" . $user_id . "')");
+    }else {
+        $sql = "UPDATE `orders` SET";
+
+        if($key && $val){
+            $sql .= "`" . $key . "` = '". $val. "', ";
+        }
+        $sql .= "`date` = '". time() ."'";
+        $sql .= " WHERE `user_chat_id` = '". $user_id ."'";
+
+        dbQuery($sql);
+    }
+}
+
 $lang = array(
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
     "information_text" => "Вывод текста",
