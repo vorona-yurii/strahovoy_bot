@@ -142,6 +142,13 @@ if($text){
                     break;
                 }
 
+                case "Standart_tarif": {
+                    $reply = $lang['tarif_text'];
+                    UserEvent($chat_id, 'Recreation');
+                    $keyboard = $keyboard_tarif;
+                    break;
+                }
+
             }
             break;
         }
