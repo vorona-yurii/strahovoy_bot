@@ -133,6 +133,15 @@ if($text){
                     break;
                 }
 
+                case "Work":
+                case "Recreation":{
+                    $reply = $lang['work_recreation_text'];
+                    UserEvent($chat_id, 'Date_back');
+                    OrderEdit($chat_id, 'date_back', $text);
+                    $keyboard = $keyboard_work_recreation;
+                    break;
+                }
+
             }
             break;
         }
