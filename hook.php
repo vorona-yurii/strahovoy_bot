@@ -63,12 +63,21 @@ if($text){
             switch (UserSelect($chat_id)){
                 case "RP": {
                     $reply = $lang['start_text'];
+                    UserEvent($chat_id, 'Null');
                     $keyboard = $keyboard_main;
                     break;
                 }
             }
             break;
         }
+
+        case "Домой":{
+            $reply = $lang['start_text'];
+            UserEvent($chat_id, 'Null');
+            $keyboard = $keyboard_main;
+            break;
+        }
+
     }
 
     //отправка смс
