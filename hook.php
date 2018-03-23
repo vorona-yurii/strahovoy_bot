@@ -50,7 +50,7 @@ if($text){
             break;
         }
 
-        case '\xF0\x9F\x93\x83 Расчитать полис':{
+        case "\xF0\x9F\x93\x83 Расчитать полис":{
             $reply = "Пожалуйста, введите название страны, или выберите из предложенных вариантов";
             UserEvent($chat_id, 'RP');
             $keyboard = $keyboard_rp;
@@ -70,6 +70,7 @@ if($text){
     $telegram->sendMessage([
         'chat_id' => $chat_id,
         'text' => $reply,
+        'parse_mode'=> 'HTML',
         'reply_markup' => $reply_markup
     ]);
 
