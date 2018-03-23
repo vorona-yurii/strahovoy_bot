@@ -14,51 +14,52 @@ $text = $result['message']['text']; //Text message
 $chat_id = $result['message']['chat']['id']; //id user
 $name = $result['message']['from']['username']; //Username
 
-$keyboard = [
+$keyboard_main = [
     ["\xF0\x9F\x93\x83 Расчитать полис"],
     ["Информация"]
-]; //keyboard
-
-$keyboard_for_calc = [
-    ["Сколько это А % от В", "А это сколько % от В"],
-    ["А  это В % от скотльки ?", "Рост / Падение от А до В ?"],
-    ["Назад"]
-]; //keyboard
+];
 
 $keyboard_home = [
     ["Домой"]
-]; //keyboard
+];
+
+$keyboard_rp = [
+    ["Весь мир", "Вся Европа"],
+    ["Назад"]
+];
+
+
 
 if($text){
 
     switch ($text){
 
         case '/start':{
-            $reply = "Добрый день!.<br/> Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV)
-";
-
+            $reply = "Добрый день!.<br/> Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV)";
             UserEvent($chat_id, 'Null');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
+            $keyboard = $keyboard_main;
 
             break;
         }
 
         case 'Информация':{
             $reply = "Вывод текста";
-
             UserEvent($chat_id, 'Null');
+            $keyboard = $keyboard_home;
+
+            break;
+        }
+
+        case '\xF0\x9F\x93\x83 Расчитать полис':{
+            $reply = "Пожалуйста, введите название страны, или выберите из предложенных вариантов";
+            UserEvent($chat_id, 'RP');
+            $keyboard = $keyboard_rp;
+
+            break;
+        }
+
+
+        //отправка смс
 
             $reply_markup = $telegram->replyKeyboardMarkup([
                 'keyboard' => $keyboard,
@@ -71,304 +72,6 @@ if($text){
                 'text' => $reply,
                 'reply_markup' => $reply_markup
             ]);
-
-            break;
-        }
-
-        case 'SpeedБух':{
-            $reply = "В разработке";
-
-            UserEvent($chat_id, 'Null');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Сайт':{
-            $reply = "<a href='http://buhconstructor.com'>buhconstructor.com</a>";
-
-            UserEvent($chat_id, 'Null');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Домой':{
-
-            $reply = "Выберите пунк";
-
-            UserEvent($chat_id, 'Null');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Другие калькуляторы':{
-            $reply = "Процентный калькулятор - Как найти процент от числа?\nВыберите калькулятор";
-
-            UserEvent($chat_id, 'OC');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_for_calc,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Калькулятор зарплаты':{
-            $reply = "Введите начисленую зароботную плату";
-
-            UserEvent($chat_id, 'ZP');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_home,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Назад':{
-
-            $reply = "Выберите пунк";
-
-            UserEvent($chat_id, 'Null');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case 'Сколько это А % от В':{
-            $reply = "Введите число <b>А</b>";
-
-            UserEvent($chat_id, 'OC1');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_for_calc,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case "А это сколько % от В":{
-            $reply = "Введите число <b>А</b>";
-
-            UserEvent($chat_id, 'OC2');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_for_calc,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case "А  это В % от скотльки ?":{
-            $reply = "Введите число <b>А</b>";
-
-            UserEvent($chat_id, 'OC3');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_for_calc,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case "Рост / Падение от А до В ?":{
-            $reply = "Введите число <b>А</b>";
-
-            UserEvent($chat_id, 'OC4');
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_for_calc,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => $reply,
-                'parse_mode'=> 'HTML',
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        case (preg_match_all('/^[0-9]{1,9}[.,]?[0-9]*$/', $text) ? true : false):{
-
-            switch (UserSelect($chat_id)){
-                case 'ZP':{
-                    $reply = "Зарплата к выплате работнику \"на руки\":  " .calc_zp($text). " грн";
-                    UserEvent($chat_id, 'Null');
-                    break;
-                }
-                case 'OC1':{
-                    $reply = "Введите число <b>B</b>";
-                    UserEvent($chat_id, 'OC1A.'. $text);
-                    break;
-                }
-                case (preg_match_all('/^OC1A[.]?[0-9]{1,9}/', UserSelect($chat_id)) ? true : false):{
-                    $A = explode('.', UserSelect($chat_id));
-                    $reply = "Ответ: ". calc_oc1($A[1], $text);
-                    UserEvent($chat_id, 'Null');
-                    break;
-                }
-                case 'OC2':{
-                    $reply = "Введите число <b>B</b>";
-                    UserEvent($chat_id, 'OC2A.'. $text);
-                    break;
-                }
-                case (preg_match_all('/^OC2A[.]?[0-9]{1,9}/', UserSelect($chat_id)) ? true : false):{
-                    $A = explode('.', UserSelect($chat_id));
-                    $reply = "Ответ: ". calc_oc2($A[1], $text). "%";
-                    UserEvent($chat_id, 'Null');
-                    break;
-                }
-                case 'OC3':{
-                    $reply = "Введите число <b>B</b>";
-                    UserEvent($chat_id, 'OC3A.'. $text);
-                    break;
-                }
-                case (preg_match_all('/^OC3A[.]?[0-9]{1,9}/', UserSelect($chat_id)) ? true : false):{
-                    $A = explode('.', UserSelect($chat_id));
-                    $reply = "Ответ: ". calc_oc3($A[1], $text);
-                    UserEvent($chat_id, 'Null');
-                    break;
-                }
-                case 'OC4':{
-                    $reply = "Введите число <b>B</b>";
-                    UserEvent($chat_id, 'OC4A.'. $text);
-                    break;
-                }
-                case (preg_match_all('/^OC4A[.]?[0-9]{1,9}/', UserSelect($chat_id)) ? true : false):{
-                    $A = explode('.', UserSelect($chat_id));
-                    $reply = "Ответ: ". calc_oc4($A[1], $text). "%";
-                    UserEvent($chat_id, 'Null');
-                    break;
-                }
-
-                default:{
-                    $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
-                    break;
-                }
-            }
-
-            $reply_markup = $telegram->replyKeyboardMarkup([
-                'keyboard' => $keyboard_home,
-                'resize_keyboard' => true,
-                'one_time_keyboard' => false
-            ]);
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'parse_mode'=> 'HTML',
-                'text' => $reply,
-                'reply_markup' => $reply_markup
-            ]);
-
-            break;
-        }
-
-        default: {
-            $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
-
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'parse_mode'=> 'HTML',
-                'text' => $reply
-            ]);
-        }
     }
 
 }else{
