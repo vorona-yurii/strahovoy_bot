@@ -72,12 +72,26 @@ if($text){
                     break;
                 }
 
-                case "All_Europe": {
+                case "All_Europe":
+                case "All_World":{
                     $reply = $lang['rp_text'];
                     UserEvent($chat_id, 'RP');
                     $keyboard = $keyboard_rp;
                     break;
                 }
+                case "Date_back_europe":{
+                    $reply = $lang['all_europe_text'] . $lang['dateto_text'];
+                    UserEvent($chat_id, 'All_Europe');
+                    $keyboard = $keyboard_rp;
+                    break;
+                }
+                case "Date_back_world":{
+                    $reply = $lang['all_world_text'] . $lang['dateto_text'];
+                    UserEvent($chat_id, 'All_World');
+                    $keyboard = $keyboard_rp;
+                    break;
+                }
+
             }
             break;
         }
@@ -100,6 +114,25 @@ if($text){
             $reply = $lang['all_world_text'] . $lang['dateto_text'];
             UserEvent($chat_id, 'All_World');
             $keyboard = $keyboard_inf_back;
+            break;
+        }
+
+        case (preg_match_all('/^[1-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[2]{1}[0]{1}[1-2]{1}[0-9]{1}$/', $text) ? true : false):{
+
+            switch (UserSelect($chat_id)){
+                case "All_World":{
+                    $reply = $lang['date_back'];
+                    UserEvent($chat_id, 'Date_back_world');
+                    $keyboard = $keyboard_inf_back;
+                    break;
+                }
+                case "All_Europe":{
+                    $reply = $lang['date_back'];
+                    UserEvent($chat_id, 'Date_back_europe');
+                    $keyboard = $keyboard_inf_back;
+                    break;
+                }
+            }
             break;
         }
 
