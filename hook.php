@@ -225,6 +225,7 @@ if($text){
                     UserEvent($chat_id, 'Success');
                     OrderEdit($chat_id, 'bithday', $text);
                     $keyboard = $keyboard_civil_bag_email;
+
                     break;
                 }
             }
