@@ -151,6 +151,20 @@ if($text){
                     break;
                 }
 
+                case "Yes_civil": {
+                    $reply = $lang['civil_text'];
+                    UserEvent($chat_id, 'Standart_tarif');
+                    $keyboard = $keyboard_civil_bag;
+                    break;
+                }
+
+                case "Yes_baggage": {
+                    $reply = $lang['baggage_text'];
+                    UserEvent($chat_id, 'Yes_civil');
+                    OrderEdit($chat_id, 'civil', 'Да');
+                    $keyboard = $keyboard_civil_bag;
+                }
+
             }
             break;
         }
