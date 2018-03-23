@@ -160,6 +160,14 @@ if($text){
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Yes_civil');
                     $keyboard = $keyboard_civil_bag_email;
+                    break;
+                }
+                
+                case "Saccess":{
+                    $reply = $lang['date_bith_text'];
+                    UserEvent($chat_id, 'Yes_civil');
+                    $keyboard = $keyboard_back;
+                    break;
                 }
 
             }
@@ -189,7 +197,7 @@ if($text){
             break;
         }
 
-        case (preg_match_all('/^[1-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[2]{1}[0]{1}[1-2]{1}[0-9]{1}$/', $text) ? true : false):{
+        case (preg_match_all('/^[1-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}$/', $text) ? true : false):{
 
             switch (UserSelect($chat_id)){
                 case "All_World":{
