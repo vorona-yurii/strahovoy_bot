@@ -301,7 +301,8 @@ if($text){
                     break;
                 }
 
-                case 'Not_baggage': {
+                case 'Yes_civil':
+                case 'Not_civil': {
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Not_baggage');
                     OrderEdit($chat_id, 'baggage', 'Да');
