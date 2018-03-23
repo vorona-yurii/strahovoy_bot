@@ -151,6 +151,7 @@ if($text){
                     break;
                 }
 
+                case "Not_civil":
                 case "Yes_civil": {
                     $reply = $lang['civil_text'];
                     UserEvent($chat_id, 'Standart_tarif');
@@ -158,6 +159,7 @@ if($text){
                     break;
                 }
 
+                case "Not_baggage":
                 case "Yes_baggage": {
                     $reply = $lang['baggage_text'];
                     UserEvent($chat_id, 'Yes_civil');
@@ -280,6 +282,27 @@ if($text){
                 case 'Yes_civil': {
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Yes_baggage');
+                    OrderEdit($chat_id, 'baggage', 'Да');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+            }
+            break;
+        }
+
+        case "Нет":{
+            switch (UserSelect($chat_id)){
+                case 'Standart_tarif': {
+                    $reply = $lang['baggage_text'];
+                    UserEvent($chat_id, 'Not_civil');
+                    OrderEdit($chat_id, 'civil', 'Да');
+                    $keyboard = $keyboard_civil_bag;
+                    break;
+                }
+
+                case 'Not_baggage': {
+                    $reply = $lang['date_bith_text'];
+                    UserEvent($chat_id, 'Not_baggage');
                     OrderEdit($chat_id, 'baggage', 'Да');
                     $keyboard = $keyboard_back;
                     break;
