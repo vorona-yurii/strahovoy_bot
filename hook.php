@@ -162,8 +162,8 @@ if($text){
                     $keyboard = $keyboard_civil_bag_email;
                     break;
                 }
-                
-                case "Saccess":{
+
+                case "Success":{
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Yes_civil');
                     $keyboard = $keyboard_back;
