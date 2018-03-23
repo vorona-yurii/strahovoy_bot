@@ -27,6 +27,10 @@ $keyboard_home = [
     ["Домой"]
 ];
 
+$keyboard_back = [
+    ["Назад"]
+];
+
 $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
     ["Назад"]
@@ -40,6 +44,11 @@ $keyboard_work_recreation = [
 $keyboard_tarif = [
     ["Стандарт", "Расширеный"],
     ["Путешествие на авто"],
+    ["Назад"]
+];
+
+$keyboard_civil_bag = [
+    ["\xF0\x9F\x93\x83 Да", "Нет"],
     ["Назад"]
 ];
 
@@ -191,17 +200,61 @@ if($text){
         }
 
         case 'Работа':{
-            $reply = $lang['tarif_text'];
+            $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Work');
             OrderEdit($chat_id, 'work_recreation', 'Работа');
-            $keyboard = $keyboard_tarif;
+            $keyboard = $keyboard_back;
 
             break;
         }
 
-        
+        case 'Стандарт':{
+            $reply = $lang['civil_text'];
+            UserEvent($chat_id, 'Standart_tarif');
+            OrderEdit($chat_id, 'tarif', 'Стандарт');
+            $keyboard = $keyboard_civil_bag;
 
+            break;
+        }
 
+        case 'Расширенный':{
+            $reply = $lang['date_bith_text'];
+            UserEvent($chat_id, 'Extended_tarif');
+            OrderEdit($chat_id, 'tarif', 'Расширенный');
+            $keyboard = $keyboard_back;
+
+            break;
+        }
+
+        case 'Путешествие на авто':{
+            $reply = $lang['date_bith_text'];
+            UserEvent($chat_id, 'Car_tarif');
+            OrderEdit($chat_id, 'tarif', 'Путешествие на авто');
+            $keyboard = $keyboard_back;
+
+            break;
+        }
+
+        case "\xF0\x9F\x93\x83 Да":{
+            switch (UserSelect($chat_id)){
+                case 'Standart_tarif': {
+                    $reply = $lang['baggage_text'];
+                    UserEvent($chat_id, 'Yes_civil');
+                    OrderEdit($chat_id, 'civil', 'Да');
+                    $keyboard = $keyboard_civil_bag;
+                    break;
+                }
+
+                case 'Yes_civil': {
+                    $reply = $lang['date_bith_text'];
+                    UserEvent($chat_id, 'Yes_baggage');
+                    OrderEdit($chat_id, 'baggage', 'Да');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+            }
+            break;
+        }
     }
 
     //отправка смс
