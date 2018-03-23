@@ -141,7 +141,7 @@ if($text){
 
                 case "Date_to_europe":
                 case "Date_to_world":{
-                    $reply = $lang['date_back'];
+                    $reply = $lang['tarif_text'];
                     UserEvent($chat_id, 'Date_back');
                     OrderEdit($chat_id, 'date_back', $text);
                     $keyboard = $keyboard_inf_back;
