@@ -253,6 +253,9 @@ if($text){
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Work');
             OrderEdit($chat_id, 'work_recreation', 'Работа');
+            OrderEdit($chat_id, 'tarif', '-');
+            OrderEdit($chat_id, 'civil', '-');
+            OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -271,6 +274,8 @@ if($text){
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Extended_tarif');
             OrderEdit($chat_id, 'tarif', 'Расширенный');
+            OrderEdit($chat_id, 'civil', '-');
+            OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -280,6 +285,8 @@ if($text){
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Car_tarif');
             OrderEdit($chat_id, 'tarif', 'Путешествие на авто');
+            OrderEdit($chat_id, 'civil', '-');
+            OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
