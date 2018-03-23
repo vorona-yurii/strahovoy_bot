@@ -31,6 +31,10 @@ $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
     ["Назад"]
 ];
+$keyboard_work_recreation = [
+    ["Отдых", "Работа"],
+    ["Назад"]
+];
 
 
 
@@ -94,6 +98,26 @@ if($text){
                     break;
                 }
 
+                case "Date_back":{
+                    $reply = $lang['date_back'];
+
+                    switch (OrderSelect($chat_id, 'world')){
+
+                        case "Весь мир":{
+                            UserEvent($chat_id, 'Date_to_world');
+                            break;
+                        }
+                        case "Вся Европа":{
+                            UserEvent($chat_id, 'Date_to_europe');
+                            break;
+                        }
+                    }
+
+                    OrderEdit($chat_id, 'world', 'Весь мир');
+                    $keyboard = $keyboard_inf_back;
+                    break;
+                }
+
             }
             break;
         }
@@ -141,10 +165,10 @@ if($text){
 
                 case "Date_to_europe":
                 case "Date_to_world":{
-                    $reply = $lang['tarif_text'];
+                    $reply = $lang['work_recreation_text'];
                     UserEvent($chat_id, 'Date_back');
                     OrderEdit($chat_id, 'date_back', $text);
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_work_recreation;
                     break;
                 }
             }

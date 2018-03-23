@@ -76,6 +76,12 @@ function UserEvent($user_id, $last_event){
         dbQuery($sql);
     }
 }
+function OrderSelect($user_id, $key)
+{
+    $result =  dbQuery("SELECT * FROM `orders` WHERE user_chat_id = '".$user_id."'")->fetch( PDO::FETCH_ASSOC );
+
+    return $result[$key];
+}
 
 function OrderEdit($user_id, $key, $val){
 
@@ -102,5 +108,5 @@ $lang = array(
     "all_world_text" => "Весь мир? ",
     "dateto_text" => "Отлично! Пожалуйста, напишите дату начала путешествия в формате ДД.ММ.ГГГГ (например, 15.07.2018).",
     "date_back" => "Принято! Пожалуйста, напишите дату окончания путешествия в формате ДД.ММ.ГГГГ (например, 25.07.2018).",
-    "tarif_text" => "Отдых или работа?",
+    "work_recreation_text" => "Отдых или работа?",
 );
