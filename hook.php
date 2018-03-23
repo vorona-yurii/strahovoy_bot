@@ -31,11 +31,12 @@ $keyboard_rp = [
 
 
 if($text){
+    $keyboard = $keyboard_main;
 
     switch ($text){
 
         case '/start':{
-            $reply = "Добрый день!. Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV)";
+            $reply = $lang['start_text'];
             UserEvent($chat_id, 'Null');
             $keyboard = $keyboard_main;
 
@@ -43,7 +44,7 @@ if($text){
         }
 
         case 'Информация':{
-            $reply = "Вывод текста";
+            $reply = $lang['information_text'];
             UserEvent($chat_id, 'Null');
             $keyboard = $keyboard_home;
 
@@ -51,10 +52,21 @@ if($text){
         }
 
         case "\xF0\x9F\x93\x83 Расчитать полис":{
-            $reply = "Пожалуйста, введите название страны, или выберите из предложенных вариантов";
+            $reply = $lang['rp_text'];
             UserEvent($chat_id, 'RP');
             $keyboard = $keyboard_rp;
 
+            break;
+        }
+
+        case "Назад":{
+            switch (UserSelect($chat_id)){
+                case "RP": {
+                    $reply = $lang['start_text'];
+                    $keyboard = $keyboard_main;
+                    break;
+                }
+            }
             break;
         }
     }
