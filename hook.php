@@ -31,11 +31,17 @@ $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
     ["Назад"]
 ];
+
 $keyboard_work_recreation = [
     ["Отдых", "Работа"],
     ["Назад"]
 ];
 
+$keyboard_tarif = [
+    ["Стандарт", "Расширеный"],
+    ["Путешествие на авто"],
+    ["Назад"]
+];
 
 
 if($text){
@@ -174,6 +180,26 @@ if($text){
             }
             break;
         }
+
+        case 'Отдых':{
+            $reply = $lang['tarif_text'];
+            UserEvent($chat_id, 'Recreation');
+            OrderEdit($chat_id, 'work_recreation', 'Отдых');
+            $keyboard = $keyboard_tarif;
+
+            break;
+        }
+
+        case 'Работа':{
+            $reply = $lang['tarif_text'];
+            UserEvent($chat_id, 'Work');
+            OrderEdit($chat_id, 'work_recreation', 'Работа');
+            $keyboard = $keyboard_tarif;
+
+            break;
+        }
+
+        
 
 
     }
