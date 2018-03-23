@@ -71,6 +71,13 @@ if($text){
                     $keyboard = $keyboard_main;
                     break;
                 }
+
+                case "All_Europe": {
+                    $reply = $lang['rp_text'];
+                    UserEvent($chat_id, 'RP');
+                    $keyboard = $keyboard_rp;
+                    break;
+                }
             }
             break;
         }
