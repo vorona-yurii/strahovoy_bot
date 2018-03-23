@@ -279,6 +279,7 @@ if($text){
                     break;
                 }
 
+                case 'Not_civil':
                 case 'Yes_civil': {
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Yes_baggage');
