@@ -271,10 +271,10 @@ if($text){
                         '%world%' => OrderSelect($chat_id, 'world'),
                         '%date_to%' => OrderSelect($chat_id, 'date_to'),
                         '%date_back%' => OrderSelect($chat_id, 'date_back'),
-                        '%days_total%' => DaysCount($chat_id),
-                        '%world_total1%' => $world_total1,
-                        '%world_total2%' => $world_total2,
-                        '%price%' => OrderTotal($chat_id)
+//                        '%days_total%' => DaysCount($chat_id),
+//                        '%world_total1%' => $world_total1,
+//                        '%world_total2%' => $world_total2,
+//                        '%price%' => OrderTotal($chat_id)
                     ];
 
                     $reply =  strtr($lang['success_text'], $array_str);
