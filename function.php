@@ -162,11 +162,11 @@ function OrderTotal($user_id){
         $order_total = $order_total * 1.5;
     }
 
-    if($order['tarif'] == "Расширенный"){
-        $order_total = $order_total * 1.2;
-    }elseif($order['tarif'] == "Путешествие на авто"){
-        $order_total = $order_total * 1.6;
-    }
+//    if($order['tarif'] == "Расширенный"){
+//        $order_total = $order_total * 1.2;
+//    }elseif($order['tarif'] == "Путешествие на авто"){
+//        $order_total = $order_total * 1.6;
+//    }
 
     return $order_total;
 
