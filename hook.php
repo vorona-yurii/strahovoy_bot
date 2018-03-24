@@ -20,7 +20,8 @@ $keyboard_main = [
 ];
 
 $keyboard_inf_back = [
-    ["Информация", "Назад"]
+    ["Информация", "Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_home = [
@@ -28,28 +29,33 @@ $keyboard_home = [
 ];
 
 $keyboard_back = [
-    ["Назад"]
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
-    ["Назад"]
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_work_recreation = [
     ["Отдых", "Работа"],
-    ["Назад"]
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_tarif = [
     ["Стандарт", "Расширенный"],
     ["Путешествие на авто"],
-    ["Назад"]
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_civil_bag_email = [
     ["\xF0\x9F\x93\x83 Да", "Нет"],
-    ["Назад"]
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 
@@ -183,11 +189,18 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
+                case "Phone":{
+                    $reply = $lang['phone_text'];
+                    UserEvent($chat_id, 'Email');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
 
             }
             break;
         }
 
+        case "\xF0\x9F\x8F\xA0 На главную":
         case "Домой":{
             $reply = $lang['start_text'];
             UserEvent($chat_id, 'Null');
@@ -258,6 +271,15 @@ if($text){
             $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
+            $keyboard = $keyboard_back;
+            break;
+        }
+
+        //получаем номер телефона
+        case (preg_match_all('/^\+380\d{3}\d{2}\d{2}\d{2}$/', $text) ? true : false):{
+            $reply = $lang['thank_text'];
+            UserEvent($chat_id, 'Phone');
+            OrderEdit($chat_id, 'phone', $text);
             $keyboard = $keyboard_back;
             break;
         }
