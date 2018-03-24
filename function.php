@@ -125,6 +125,22 @@ function DaysCount($user_id){
 }
 
 /**
+ * @param $key
+ * @return mixed
+ */
+function getApiNBU($key)
+{
+    $val = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'), TRUE);
+
+    if($key == 'USD'){
+        return $val['34']['rate'];
+    }elseif($key == 'EUR'){
+        return $val['42']['rate'];
+    }
+
+}
+
+/**
  * @param $user_id
  */
 function OrderTotal($user_id){
@@ -156,7 +172,7 @@ function OrderTotal($user_id){
 
     $coefficient = getCofFromTableExcel($sheetname, $days_count, $civil);
 
-    $order_total = $days_count * $coefficient;
+    $order_total = $coefficient;
 
     if($order['work_recreation'] == "Отдых"){
         $order_total = $order_total * 1.5;
@@ -173,6 +189,8 @@ function OrderTotal($user_id){
     }elseif($user_years >= 75 && $user_years <= 80){
         $order_total = $order_total * 3;
     }
+
+    $order_total = $order_total * getApiNBU('USD');
 
     return $order_total;
 
