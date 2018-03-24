@@ -254,7 +254,7 @@ if($text){
             break;
         }
         //получаем емейл
-        case (preg_match_all('/^[-a-z0-9!#$%&\'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&\'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/', $text) ? true : false):{
+        case (preg_match_all('/^(?!.*@.*@.*$)(?!.*@.*\-\-.*\..*$)(?!.*@.*\-\..*$)(?!.*@.*\-$)(.*@.+(\..{1,11})?)$/', $text) ? true : false):{
             $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
