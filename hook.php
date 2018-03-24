@@ -252,11 +252,6 @@ if($text){
                 case "Car_tarif":
                 case "Not_baggage":
                 case "Yes_baggage":{
-                    $reply = $lang['success_text'];
-                    $reply = str_replace("%world%", OrderSelect($chat_id, 'world'), $reply);
-                    $reply = str_replace("%date_to%", OrderSelect($chat_id, 'date_to'), $reply);
-                    $reply = str_replace("%date_back%", OrderSelect($chat_id, 'date_back'), $reply);
-                    $reply = str_replace("%days_total%", DaysCount($chat_id), $reply);
 
                     switch (OrderSelect($chat_id, 'world')){
 
@@ -272,9 +267,17 @@ if($text){
                         }
                     }
 
-                    $reply = str_replace("%world_total1%", $world_total1, $lang['success_text']);
-                    $reply = str_replace("%world_total2%", $world_total2, $lang['success_text']);
-                    //$reply = str_replace("%price%", OrderTotal($chat_id), $lang['success_text']);
+                    $array_str = [
+                        '%world%' => OrderSelect($chat_id, 'world'),
+                        '%date_to%' => OrderSelect($chat_id, 'date_to'),
+                        '%date_back%' => OrderSelect($chat_id, 'date_back'),
+                        '%days_total%' => DaysCount($chat_id),
+                        '%world_total1%' => $world_total1,
+                        '%world_total2%' => $world_total2,
+                        '%price%' => OrderTotal($chat_id)
+                    ];
+
+                    $reply =  strtr($lang['success_text'], $array_str);
 
                     UserEvent($chat_id, 'Success');
                     OrderEdit($chat_id, 'bithday', $text);
