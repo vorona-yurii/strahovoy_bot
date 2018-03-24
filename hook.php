@@ -170,6 +170,20 @@ if($text){
                     break;
                 }
 
+                case "Yes_order":{
+                    $reply = $lang['success_text'];
+                    UserEvent($chat_id, 'Success');
+                    $keyboard = $keyboard_civil_bag_email;
+                    break;
+                }
+
+                case "Email":{
+                    $reply = $lang['email_text'];
+                    UserEvent($chat_id, 'Yes_order');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
             }
             break;
         }
@@ -196,7 +210,7 @@ if($text){
             $keyboard = $keyboard_inf_back;
             break;
         }
-
+        //получаем дату а в формате xx.xx.xxxx
         case (preg_match_all('/^[1-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}$/', $text) ? true : false):{
 
             switch (UserSelect($chat_id)){
@@ -237,6 +251,14 @@ if($text){
                     break;
                 }
             }
+            break;
+        }
+        //получаем емейл
+        case (preg_match_all('/^[-a-z0-9!#$%&\'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&\'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/', $text) ? true : false):{
+            $reply = $lang['phone_text'];
+            UserEvent($chat_id, 'Email');
+            OrderEdit($chat_id, 'email', $text);
+            $keyboard = $keyboard_back;
             break;
         }
 
@@ -310,6 +332,13 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
+
+                case "Success": {
+                    $reply = $lang['email_text'];
+                    UserEvent($chat_id, 'Yes_order');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
             }
             break;
         }
@@ -330,6 +359,13 @@ if($text){
                     UserEvent($chat_id, 'Not_baggage');
                     OrderEdit($chat_id, 'baggage', 'Нет');
                     $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "Success": {
+                    $reply = $lang['start_text'];
+                    UserEvent($chat_id, 'Null');
+                    $keyboard = $keyboard_main;
                     break;
                 }
             }
