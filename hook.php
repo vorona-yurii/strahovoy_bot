@@ -167,7 +167,7 @@ if($text){
 
                 case "Success":{
                     $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Yes_civil');
+                    UserEvent($chat_id, 'Yes_baggage');
                     $keyboard = $keyboard_back;
                     break;
                 }
