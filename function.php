@@ -168,6 +168,12 @@ function OrderTotal($user_id){
         $order_total = $order_total * 1.6;
     }
 
+    if($user_years >= 71 && $user_years < 75){
+        $order_total = $order_total * 2;
+    }elseif($user_years >= 75 && $user_years <= 80){
+        $order_total = $order_total * 3;
+    }
+
     return $order_total;
 
 }
@@ -192,7 +198,8 @@ $lang = array(
         \nСтраховая сумма %world_total1%€.
         \nНесчастный случай %world_total2%€.
         \nДоп. опции: ...
-        \nЦена полиса: %price%грн",
+        \nЦена полиса: %price%грн
+        \nЖелаете Оставить заявку на приобретение?",
     "email_text" => "Отлично! Пожалуйста, укажите свой E-mail и мы с Вами свяжемся для консультации и оформления полиса.",
     "phone_text" => "Отлично! Пожалуйста, укажите свой № телефона в формате +380ххххххххх.",
     "thank_text" => "Спасибо за Вашу заявку!",
