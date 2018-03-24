@@ -81,7 +81,7 @@ function OrderSelect($user_id, $key)
  */
 function OrderFull($user_id)
 {
-    $result =  dbQuery("SELECT * FROM `orders`")->fetch( PDO::FETCH_ASSOC );
+    $result =  dbQuery("SELECT * FROM `orders` WHERE user_chat_id = '".$user_id."'")->fetch( PDO::FETCH_ASSOC );
 
     return $result;
 }
