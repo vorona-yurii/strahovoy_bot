@@ -274,7 +274,7 @@ if($text){
 
                     $reply = str_replace("%world_total1%", $world_total1, $lang['success_text']);
                     $reply = str_replace("%world_total2%", $world_total2, $lang['success_text']);
-                    $reply = str_replace("%price%", OrderTotal($chat_id), $lang['success_text']);
+                    //$reply = str_replace("%price%", OrderTotal($chat_id), $lang['success_text']);
 
                     UserEvent($chat_id, 'Success');
                     OrderEdit($chat_id, 'bithday', $text);
