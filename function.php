@@ -139,6 +139,9 @@ function OrderTotal($user_id){
 
     $user_years = $interval->format('%Y');
 
+    $sheetname = '30000';
+    $civil = true;
+    
     if($order['world'] == "Вся Европа"){
         $sheetname = '30000';
     }elseif($order['world'] == "Весь мир"){
