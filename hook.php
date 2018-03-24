@@ -252,10 +252,11 @@ if($text){
                 case "Car_tarif":
                 case "Not_baggage":
                 case "Yes_baggage":{
-                    $reply = str_replace("%world%", OrderSelect($chat_id, 'world'), $lang['success_text']);
-                    $reply = str_replace("%date_to%", OrderSelect($chat_id, 'date_to'), $lang['success_text']);
-                    $reply = str_replace("%date_back%", OrderSelect($chat_id, 'date_back'), $lang['success_text']);
-                    $reply = str_replace("%days_total%", DaysCount($chat_id), $lang['success_text']);
+                    $reply = $lang['success_text'];
+                    $reply = str_replace("%world%", OrderSelect($chat_id, 'world'), $reply);
+                    $reply = str_replace("%date_to%", OrderSelect($chat_id, 'date_to'), $reply);
+                    $reply = str_replace("%date_back%", OrderSelect($chat_id, 'date_back'), $reply);
+                    $reply = str_replace("%days_total%", DaysCount($chat_id), $reply);
 
                     switch (OrderSelect($chat_id, 'world')){
 
