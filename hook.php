@@ -274,7 +274,7 @@ if($text){
                         '%days_total%' => DaysCount($chat_id),
                         '%world_total1%' => $world_total1,
                         '%world_total2%' => $world_total2,
-                        '%price%' => OrderTotal($chat_id)
+//                        '%price%' => OrderTotal($chat_id)
                     ];
 
                     $reply =  strtr($lang['success_text'], $array_str);
