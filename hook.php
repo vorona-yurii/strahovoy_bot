@@ -50,7 +50,7 @@ $keyboard_tarif = [
 ];
 
 $keyboard_civil_bag_email = [
-    ["\xF0\x9F\x93\x83 Да", "Нет"],
+    ["\xF0\x9F\x93\x83 Да", "\xE2\x9D\x8C Нет"],
     ["Назад", "\xF0\x9F\x8F\xA0 На главную"]
 ];
 
@@ -252,7 +252,29 @@ if($text){
                 case "Car_tarif":
                 case "Not_baggage":
                 case "Yes_baggage":{
-                    $reply = $lang['success_text'];
+                    $reply = str_replace("%world%", OrderSelect($chat_id, 'world'), $lang['success_text']);
+                    $reply = str_replace("%date_to%", OrderSelect($chat_id, 'date_to'), $lang['success_text']);
+                    $reply = str_replace("%date_back%", OrderSelect($chat_id, 'date_back'), $lang['success_text']);
+                    $reply = str_replace("%days_total%", DaysCount($chat_id), $lang['success_text']);
+
+                    switch (OrderSelect($chat_id, 'world')){
+
+                        case "Весь мир":{
+                            $world_total1 = '50000';
+                            $world_total2 = '5000';
+                            break;
+                        }
+                        case "Вся Европа":{
+                            $world_total1 = '30000';
+                            $world_total2 = '3000';
+                            break;
+                        }
+                    }
+
+                    $reply = str_replace("%world_total1%", $world_total1, $lang['success_text']);
+                    $reply = str_replace("%world_total2%", $world_total2, $lang['success_text']);
+                    $reply = str_replace("%price%", OrderTotal($chat_id), $lang['success_text']);
+
                     UserEvent($chat_id, 'Success');
                     OrderEdit($chat_id, 'bithday', $text);
                     $keyboard = $keyboard_civil_bag_email;
@@ -361,7 +383,7 @@ if($text){
             break;
         }
 
-        case "Нет":{
+        case "\xE2\x9D\x8C Нет":{
             switch (UserSelect($chat_id)){
                 case 'Standart_tarif': {
                     $reply = $lang['baggage_text'];
