@@ -3,6 +3,9 @@ composer.lock
 docs
 vendor
 
+admin/.htaccess
+admin/.htpasswd
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 

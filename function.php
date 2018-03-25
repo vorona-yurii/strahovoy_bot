@@ -87,6 +87,16 @@ function OrderFull($user_id)
 }
 
 /**
+ * @return mixed
+ */
+function OrderFullUser()
+{
+    $result =  dbQuery("SELECT * FROM `orders`")->fetchAll( PDO::FETCH_ASSOC );
+
+    return $result;
+}
+
+/**
  * @param $user_id
  * @param $key
  * @param $val
