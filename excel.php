@@ -181,3 +181,66 @@ function getCofFromTableExcel($sheetname = '30000', $days_count = 3, $civil = tr
 
     return $elem;
 }
+
+function getCofBagFromTableExcel($days_count = 3, $total = 200){
+
+    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+    $reader->setLoadSheetsOnly('Багаж');
+
+    $spreadsheet = $reader->load(EXCEL_TABLE);
+
+    $coordinate = 'A1';
+
+    $elem_i = 8;
+
+    switch ($total){
+        case (($total < 250) ? true : false):{$total = 200; $elem_i=8; break;}
+        case (($total >= 250 && $total < 350) ? true : false): {$total = 200; $elem_i=9; break;}
+        case (($total >= 350 && $total < 450) ? true : false): {$total = 300; $elem_i=10; break;}
+        case (($total >= 450 && $total < 550) ? true : false): {$total = 400; $elem_i=11; break;}
+        case (($total >= 625 && $total < 875) ? true : false): {$total = 500; $elem_i=12; break;}
+        case (($total >= 875 && $total < 1125) ? true : false): {$total = 750; $elem_i=13; break;}
+        case (($total >= 1125 && $total < 1375) ? true : false): {$total = 1000; $elem_i=14; break;}
+        case (($total >= 1125 && $total < 1750) ? true : false): {$total = 1250; $elem_i=15; break;}
+        case (($total >= 1750) ? true : false): {$total = 2000; $elem_i=16; break;}
+    }
+
+    $elem_i2 = $elem_i+14;
+
+    switch ($days_count){
+        case 3: $coordinate = 'D'.$elem_i; break;
+        case 4: $coordinate = 'F'.$elem_i; break;
+        case 5: $coordinate = 'G'.$elem_i; break;
+        case 6: $coordinate = 'H'.$elem_i; break;
+        case 7: $coordinate = 'I'.$elem_i; break;
+        case 8: $coordinate = 'J'.$elem_i; break;
+        case 9: $coordinate = 'K'.$elem_i; break;
+        case 10: $coordinate = 'L'.$elem_i; break;
+        case 11: $coordinate = 'M'.$elem_i; break;
+        case 12: $coordinate = 'N'.$elem_i; break;
+        case 13: $coordinate = 'O'.$elem_i; break;
+        case 14: $coordinate = 'P'.$elem_i; break;
+        case 15: $coordinate = 'Q'.$elem_i; break;
+        case 16: $coordinate = 'R'.$elem_i; break;
+        case 17: $coordinate = 'D'.$elem_i2; break;
+        case 18: $coordinate = 'E'.$elem_i2; break;
+        case 19: $coordinate = 'F'.$elem_i2; break;
+        case 20: $coordinate = 'G'.$elem_i2; break;
+        case 21: $coordinate = 'H'.$elem_i2; break;
+        case 22: $coordinate = 'I'.$elem_i2; break;
+        case 23: $coordinate = 'J'.$elem_i2; break;
+        case 24: $coordinate = 'R'.$elem_i2; break;
+        case 25: $coordinate = 'L'.$elem_i2; break;
+        case 26: $coordinate = 'M'.$elem_i2; break;
+        case 27: $coordinate = 'N'.$elem_i2; break;
+        case 28: $coordinate = 'O'.$elem_i2; break;
+        case 29: $coordinate = 'P'.$elem_i2; break;
+        case 30: $coordinate = 'Q'.$elem_i2; break;
+        case (($days_count > 30) ? true : false): $coordinate = 'R'.$elem_i2; break;
+    }
+
+
+    $elem = $spreadsheet->getActiveSheet()->getCell($coordinate)->getValue();
+
+    return $elem;
+}

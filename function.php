@@ -200,6 +200,10 @@ function OrderTotal($user_id){
         $order_total = $order_total * 3;
     }
 
+    if($order['baggage'] == "Да"){
+        $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
+    }
+
     $order_total = $order_total * getApiNBU('USD');
 
     return $order_total;
