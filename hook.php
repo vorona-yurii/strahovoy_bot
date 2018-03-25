@@ -255,11 +255,11 @@ if($text){
                         $reply = $lang['work_recreation_text'];
                         UserEvent($chat_id, 'Date_back');
                         OrderEdit($chat_id, 'date_back', $text);
+                        $keyboard = $keyboard_work_recreation;
                     }else{
                         $reply = $lang['error_date_back_text'];
+                        $keyboard = $keyboard_inf_back;
                     }
-
-                    $keyboard = $keyboard_work_recreation;
                     break;
                 }
 
