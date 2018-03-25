@@ -284,11 +284,11 @@ if($text){
                     }
 
                     if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
-                        $options = 'Гражданская ответственность, Страхование багажа';
+                        $options = 'Гражданская ответственность, Страхование багажа.';
                     }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                        $options = 'Гражданская ответственность';
+                        $options = 'Гражданская ответственность.';
                     }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                        $options = 'Страхование багажа';
+                        $options = 'Страхование багажа.';
                     }else{
                         $options = 'Нет';
                     }
