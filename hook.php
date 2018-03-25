@@ -224,25 +224,41 @@ if($text){
 
             switch (UserSelect($chat_id)){
                 case "All_World":{
-                    $reply = $lang['date_back'];
-                    UserEvent($chat_id, 'Date_to_world');
-                    OrderEdit($chat_id, 'date_to', $text);
+                    if(getDiffDate("Now", $text, 0)){
+                        $reply = $lang['date_back'];
+                        UserEvent($chat_id, 'Date_to_world');
+                        OrderEdit($chat_id, 'date_to', $text);
+                    }else{
+                        $reply = $lang['error_date_to_text'];
+                    }
+
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
                 case "All_Europe":{
-                    $reply = $lang['date_back'];
-                    UserEvent($chat_id, 'Date_to_europe');
-                    OrderEdit($chat_id, 'date_to', $text);
+                    if(getDiffDate("Now", $text, 0)){
+                        $reply = $lang['date_back'];
+                        UserEvent($chat_id, 'Date_to_europe');
+                        OrderEdit($chat_id, 'date_to', $text);
+                    }else{
+                        $reply = $lang['error_date_to_text'];
+                    }
+
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
 
                 case "Date_to_europe":
                 case "Date_to_world":{
-                    $reply = $lang['work_recreation_text'];
-                    UserEvent($chat_id, 'Date_back');
-                    OrderEdit($chat_id, 'date_back', $text);
+
+                    if(getDiffDate(OrderSelect($chat_id, 'date_to'), $text, 3)){
+                        $reply = $lang['work_recreation_text'];
+                        UserEvent($chat_id, 'Date_back');
+                        OrderEdit($chat_id, 'date_back', $text);
+                    }else{
+                        $reply = $lang['error_date_back_text'];
+                    }
+
                     $keyboard = $keyboard_work_recreation;
                     break;
                 }

@@ -210,6 +210,35 @@ function OrderTotal($user_id){
 
 }
 
+/**
+ * @param $date_to
+ * @param $date_back
+ * @param $diff
+ * @return bool
+ */
+function getDiffDate($date_to, $date_back, $diff)
+{
+    if($date_to = "Now") $date_to = date('d.m.Y');
+
+    $date1 = strtotime($date_to);
+    $date2 = strtotime($date_back);
+
+    if($date2 >= $date1){
+        $datetime1 = new DateTime($date_to);
+        $datetime2 = new DateTime($date_back);
+        $interval = $datetime1->diff($datetime2);
+
+        $diff_years = $interval->format('%d');
+
+        if($diff_years >= $diff){
+            return true;
+        }
+
+        return false;
+    }
+    return false;
+}
+
 $lang = array(
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
     "information_text" => "Вывод текста",
@@ -235,4 +264,6 @@ $lang = array(
     "email_text" => "Отлично! Пожалуйста, укажите свой E-mail и мы с Вами свяжемся для консультации и оформления полиса.",
     "phone_text" => "Отлично! Пожалуйста, укажите свой № телефона в формате +380ххххххххх.",
     "thank_text" => "Спасибо за Вашу заявку!",
+    "error_date_to_text" => "Введите коректную дату, которая больше сегодняшней!!!",
+    "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия!!!",
 );
