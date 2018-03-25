@@ -218,7 +218,9 @@ function OrderTotal($user_id){
  */
 function getDiffDate($date_to, $date_back, $diff)
 {
-    if($date_to = "Now") $date_to = date('d.m.Y');
+    if($date_to == "Now") {
+        $date_to = date('d.m.Y');
+    }
 
     $date1 = strtotime($date_to);
     $date2 = strtotime($date_back);
