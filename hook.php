@@ -283,14 +283,25 @@ if($text){
                         }
                     }
 
+                    if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
+                        $options = 'Гражданская ответственность, Страхование багажа';
+                    }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
+                        $options = 'Гражданская ответственность';
+                    }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
+                        $options = 'Страхование багажа';
+                    }else{
+                        $options = 'Нет';
+                    }
+
                     $array_str = [
-                        '%world%' => OrderSelect($chat_id, 'world'),
-                        '%date_to%' => OrderSelect($chat_id, 'date_to'),
-                        '%date_back%' => OrderSelect($chat_id, 'date_back'),
-                        '%days_total%' => DaysCount($chat_id),
+                        '%world%' =>        OrderSelect($chat_id, 'world'),
+                        '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
+                        '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
+                        '%days_total%' =>   DaysCount($chat_id),
                         '%world_total1%' => $world_total1,
                         '%world_total2%' => $world_total2,
-                        '%price%' => round(OrderTotal($chat_id), 2)
+                        '%options%' =>      $options,
+                        '%price%' =>        round(OrderTotal($chat_id), 2)
                     ];
 
                     $reply =  strtr($lang['success_text'], $array_str);
