@@ -204,6 +204,10 @@ function OrderTotal($user_id){
         $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
     }
 
+    if($coff = getSettings('coff')){
+        $order_total = $order_total * $coff['value'];
+    }
+
     $order_total = $order_total * getApiNBU('USD');
 
     return $order_total;
@@ -239,6 +243,37 @@ function getDiffDate($date_to, $date_back, $diff)
         return false;
     }
     return false;
+}
+
+/**
+ * @param $key
+ * @return mixed
+ */
+function getSettings($key){
+
+    $result =  dbQuery("SELECT * FROM `settings` WHERE `key` = '".$key."'")->fetch( PDO::FETCH_ASSOC );
+
+    return $result;
+}
+
+/**
+ * @param $key
+ * @param $value
+ */
+function setSettings($key, $value){
+
+    if(dbQuery("SELECT * FROM `settings` WHERE `key` = '".$key."'")->fetch( PDO::FETCH_COLUMN ) == NULL) {
+        dbQuery("INSERT INTO `settings` (`key`, `value`) VALUES ('" . $key . "', '" . $value . "')");
+    }else {
+        $sql = "UPDATE `settings` SET";
+
+        if($value){
+            $sql .= "`value` = '".$value."'";
+        }
+        $sql .= " WHERE `key` = '". $key ."'";
+
+        dbQuery($sql);
+    }
 }
 
 $lang = array(

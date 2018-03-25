@@ -47,11 +47,8 @@ $users = OrderFullUser();
                         </span>
                     </div>
                 </li>
-                <li class="landing_link">
-                    <a target="_blank" href="Landing_page/index.html"><i class="fa fa-star"></i> <span class="nav-label">Landing Page</span> <span class="label label-warning pull-right">NEW</span></a>
-                </li>
-                <li class="special_link">
-                    <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
+                <li>
+                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Общий коэффициент</span></a>
                 </li>
             </ul>
 
