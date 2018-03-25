@@ -234,7 +234,7 @@ function getDiffDate($date_to, $date_back, $diff)
         $datetime2 = new DateTime($date_back);
         $interval = $datetime1->diff($datetime2);
 
-        $diff_years = $interval->format('%d');
+        $diff_years = $interval->format('%a');
 
         if($diff_years >= $diff){
             return true;

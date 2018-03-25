@@ -72,7 +72,7 @@ if($coff = getSettings('coff')){
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal">
                                 <div class="form-group"><label class="col-sm-2 control-label">Общий коэффициент</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" name="coff" value="<?=$cofficient;?>"></div>
+                                    <div class="col-sm-10"><input type="text" pattern="\d{1}[.]*\d*" class="form-control" name="coff" value="<?=$cofficient;?>"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
