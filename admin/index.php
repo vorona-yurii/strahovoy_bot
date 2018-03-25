@@ -48,7 +48,7 @@ $users = OrderFullUser();
                     </div>
                 </li>
                 <li>
-                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Общий коэффициент</span></a>
+                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Настройки</span></a>
                 </li>
             </ul>
 
