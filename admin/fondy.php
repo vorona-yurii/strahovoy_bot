@@ -8,14 +8,21 @@
 require_once "../config.php";
 require_once "../function.php";
 
-if(isset($_POST['coff'])){
-    setSettings('coff', $_POST['coff']);
+if(isset($_POST)){
+    setSettings('merchant_id', $_POST['merchant_id']);
+    setSettings('key_payment', $_POST['key_payment']);
 }
 
-if($coff = getSettings('coff')){
-    $cofficient = $coff['value'];
+if($merchant_id = getSettings('merchant_id')){
+    $merchant_id = $merchant_id['value'];
 }else{
-    $cofficient = '';
+    $merchant_id = '';
+}
+
+if($key_payment = getSettings('key_payment')){
+    $key_payment = $key_payment['value'];
+}else{
+    $key_payment = '';
 }
 
 ?>
@@ -59,7 +66,7 @@ if($coff = getSettings('coff')){
                     <a href="index.php"><i class="fa fa-table"></i> <span class="nav-label">Таблица юзеров</span></a>
                 </li>
                 <li>
-                    <a href="fondy.php"><i class="fa fa-cog"></i> <span class="nav-label">Fondy</span></a>
+                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Общий коф</span></a>
                 </li>
             </ul>
 
@@ -74,8 +81,11 @@ if($coff = getSettings('coff')){
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal">
-                                <div class="form-group"><label class="col-sm-2 control-label">Общий коэффициент</label>
-                                    <div class="col-sm-10"><input type="text" pattern="\d{1}[.]*\d*" class="form-control" name="coff" value="<?=$cofficient;?>"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">ID мерчанта:</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="merchant_id" value="<?=$merchant_id;?>"></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Ключ платежа:</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" name="key_payment" value="<?=$key_payment;?>"></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>

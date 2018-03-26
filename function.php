@@ -278,6 +278,33 @@ function setSettings($key, $value){
     }
 }
 
+/**
+ * @param $merchant_id
+ * @param $password
+ * @param array $params
+ * @return string
+ */
+function getSignature( $merchant_id , $password , $params = array() ){
+    $params['merchant_id'] = $merchant_id;
+    $params = array_filter($params,'strlen');
+    ksort($params);
+    $params = array_values($params);
+    array_unshift( $params , $password );
+    $params = join('|',$params);
+    return(sha1($params));
+}
+
+function LinkGen($user_id)
+{
+    $merchent_id = '12312312';
+
+    $total_price = OrderSelect($user_id, 'total_price');
+
+    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchent_id.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","amount_readonly":true}';
+
+    return file_get_contents("https://clck.ru/--?url=".$link);
+}
+
 $lang = array(
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
     "information_text" => "Вывод текста",
@@ -302,7 +329,7 @@ $lang = array(
         \nЖелаете Оставить заявку на приобретение?",
     "email_text" => "Отлично! Пожалуйста, укажите свой E-mail и мы с Вами свяжемся для консультации и оформления полиса.",
     "phone_text" => "Отлично! Пожалуйста, укажите свой № телефона в формате +380ххххххххх.",
-    "thank_text" => "<a href='https://clck.ru/D5Lnr'>Ссылка на оплату</a>",
+    "thank_text" => "Спасибо за заказ!\n<a href='%link%'>Ссылка на оплату</a>",
     "error_date_to_text" => "Введите коректную дату начала путешествия, которая больше сегодняшней!!!",
     "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия хотя бы на 3 дня!!!",
 );

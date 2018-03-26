@@ -48,7 +48,10 @@ $users = OrderFullUser();
                     </div>
                 </li>
                 <li>
-                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Настройки</span></a>
+                    <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Общий коф</span></a>
+                </li>
+                <li>
+                    <a href="fondy.php"><i class="fa fa-cog"></i> <span class="nav-label">Fondy</span></a>
                 </li>
             </ul>
 

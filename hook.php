@@ -326,7 +326,12 @@ if($text){
 
         //получаем номер телефона
         case (preg_match_all('/^\+380\d{3}\d{2}\d{2}\d{2}$/', $text) ? true : false):{
-            $reply = $lang['thank_text'];
+
+            $array_str = [
+                '%link%' => LinkGen($chat_id)
+            ];
+            $reply =  strtr($lang['thank_text'], $array_str);
+
             UserEvent($chat_id, 'Phone');
             OrderEdit($chat_id, 'phone', $text);
             $keyboard = $keyboard_back;
