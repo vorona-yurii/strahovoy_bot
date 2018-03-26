@@ -29,6 +29,7 @@ if(isset($_POST['bulk'])){
             ]);
 
         }
+        header("Location: ".$_SERVER['REQUEST_URI']);
     }
 }
 
