@@ -300,19 +300,28 @@ function getSignature( $merchant_id , $password , $params = array() ){
  */
 function LinkGenFondy($user_id)
 {
-    $merchent_id = getSettings('merchent_id');
+    $merchant_id = getSettings('merchant_id');
     $password = getSettings('key_payment');
 
-    $signature = getSignature($merchent_id, $password);
+    $total_price = round(OrderSelect($user_id, 'total_price'), 2;
 
-    $total_price = OrderSelect($user_id, 'total_price');
+    $params = [
+        'merchant_id' => $merchant_id,
+        'currency' => 'UAH',
+        'lang' => 'ru',
+        'order_desc' => 'Оплата страхового полиса',
+        'amount' => $total_price,
+        'amount_readonly' => true
+    ];
 
-    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchent_id.'","signature":"'.$signature.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","amount_readonly":true}';
+    $signature = getSignature($merchant_id, $password, $params);
+
+    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","amount_readonly":true",signature":"'.$signature.'"}';
 
     return file_get_contents("https://clck.ru/--?url=".$link);
 }
 
-$lang = array(
+$lang = [
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
     "information_text" => "Вывод текста",
     "rp_text" => "Пожалуйста, выберите из предложенных вариантов.",
@@ -339,4 +348,4 @@ $lang = array(
     "thank_text" => "Спасибо за заказ!\n<a href='%link%'>Ссылка на оплату</a>",
     "error_date_to_text" => "Введите коректную дату начала путешествия, которая больше сегодняшней!!!",
     "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия хотя бы на 3 дня!!!",
-);
+];
