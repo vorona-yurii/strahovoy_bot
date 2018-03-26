@@ -97,7 +97,7 @@ $users = OrderFullUser();
                                         <td><?=$user['tarif']?></td>
                                         <td><?=$user['civil']?></td>
                                         <td><?=$user['baggage']?></td>
-                                        <td><?=$user['total_price']?> грн</td>
+                                        <td><?=round($user['total_price'], 2)?> грн</td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
