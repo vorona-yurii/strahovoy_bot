@@ -120,6 +120,16 @@ function OrderEdit($user_id, $key, $val){
 
 /**
  * @param $user_id
+ * @return PDOStatement|string
+ */
+function OrderDeleteUser($id)
+{
+    $result =  dbQuery("DELETE FROM `orders` WHERE  `id` = '".$id."'");
+
+}
+
+/**
+ * @param $user_id
  */
 function DaysCount($user_id){
 

@@ -10,6 +10,11 @@ require_once "../function.php";
 
 $users = OrderFullUser();
 
+if(isset($_GET['delete'])){
+    OrderDeleteUser($_GET['delete']);
+    header("Location: index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -87,6 +92,7 @@ $users = OrderFullUser();
                                         <th>Гражд. отв.</th>
                                         <th>Багаж</th>
                                         <th>Цена</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -104,6 +110,7 @@ $users = OrderFullUser();
                                         <td><?=$user['civil']?></td>
                                         <td><?=$user['baggage']?></td>
                                         <td><?=round($user['total_price'], 2)?> грн</td>
+                                        <td><a href="index.php?delete=<?=$user['id']?>">Удалить</a></td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
