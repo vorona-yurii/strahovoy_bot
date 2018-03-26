@@ -89,8 +89,8 @@ if(isset($_POST['bulk'])){
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal">
-                                <div class="form-group"><label class="col-sm-2 control-label">Общий коэффициент</label>
-                                    <div class="col-sm-10"><textarea name="bulk" id="bulk" cols="30" rows="10"></textarea></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Массовая рассылка</label>
+                                    <div class="col-sm-10"><textarea name="bulk" id="bulk" cols="100" rows="5"></textarea></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
