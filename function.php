@@ -309,6 +309,8 @@ function LinkGenFondy($user_id)
     $total_price = round(OrderSelect($user_id, 'total_price'), 2);
     $order_id = "ID".OrderSelect($user_id, 'id');
 
+    $sender_email = OrderSelect($user_id, 'email');
+
     $params = [
         'order_id' => $order_id,
         'merchant_id' => $merchant_id,
@@ -319,20 +321,20 @@ function LinkGenFondy($user_id)
 
     $signature = getSignature($merchant_id, $password, $params);
 
-    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","signature":"'.$signature.'","currency":"UAH","fields":[{"name":"descr","value":"Оплата страхового полиса","label":"Назначение платежа","valid":"","readonly":true}],"params":{"order_id":"'.$order_id.'"},"amount":"'.$total_price.'","amount_readonly":true}';
-    
+    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","signature":"'.$signature.'","sender_email":"'.$sender_email.'","currency":"UAH","fields":[{"name":"descr","value":"Оплата страхового полиса","label":"Назначение платежа","valid":"","readonly":true}],"params":{"order_id":"'.$order_id.'"},"amount":"'.$total_price.'","amount_readonly":true}';
+
     return file_get_contents("https://clck.ru/--?url=".$link);
 }
 
 $lang = [
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
     "information_text" => "Вывод текста",
-    "rp_text" => "Пожалуйста, выберите из предложенных вариантов.",
+    "rp_text" => "Пожалуйста, выберите, куда Вы хотите поехать.",
     "all_europe_text" => "Вся Европа? ",
     "all_world_text" => "Весь мир? ",
     "dateto_text" => "Отлично! Пожалуйста, напишите дату начала путешествия в формате ДД.ММ.ГГГГ (например, 15.07.2018).",
     "date_back" => "Принято! Пожалуйста, напишите дату окончания путешествия в формате ДД.ММ.ГГГГ (например, 25.07.2018).",
-    "work_recreation_text" => "Отдых или работа?",
+    "work_recreation_text" => "Цель Вашего путешествия: отдых или работа?",
     "tarif_text" => "Какой тарифный план Вам посчитать?",
     "civil_text" => "Добавить гражданскую ответственность?",
     "date_bith_text" => "Пожалуйста, укажите дату рождения застрахованного в формате ДД.ММ.ГГГГ (например, 25.07.1990).",
