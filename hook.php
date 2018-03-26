@@ -393,7 +393,10 @@ if($text){
         case "\xF0\x9F\x93\x83 Да":{
             switch (UserSelect($chat_id)){
                 case 'Standart_tarif': {
-                    $reply = $lang['baggage_text'];
+                    $array_str = [
+                        '%value%' => OrderTotal($chat_id, true)
+                    ];
+                    $reply =  strtr($lang['baggage_text'], $array_str);
                     UserEvent($chat_id, 'Yes_civil');
                     OrderEdit($chat_id, 'civil', 'Да');
                     $keyboard = $keyboard_civil_bag_email;
@@ -422,7 +425,11 @@ if($text){
         case "\xE2\x9D\x8C Нет":{
             switch (UserSelect($chat_id)){
                 case 'Standart_tarif': {
-                    $reply = $lang['baggage_text'];
+                    $array_str = [
+                        '%value%' => OrderTotal($chat_id, true)
+                    ];
+                    $reply =  strtr($lang['baggage_text'], $array_str);
+                    
                     UserEvent($chat_id, 'Not_civil');
                     OrderEdit($chat_id, 'civil', 'Нет');
                     $keyboard = $keyboard_civil_bag_email;
