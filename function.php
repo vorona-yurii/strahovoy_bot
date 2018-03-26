@@ -314,12 +314,11 @@ function LinkGenFondy($user_id)
         'lang' => 'ru',
         'order_desc' => 'Оплата страхового полиса',
         'amount' => $total_price,
-        'amount_readonly' => true
     ];
 
     $signature = getSignature($merchant_id, $password, $params);
 
-    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","amount_readonly":true","signature":"'.$signature.'"}';
+    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","signature":"'.$signature.'"}';
 
     return file_get_contents("https://clck.ru/--?url=".$link);
 }
