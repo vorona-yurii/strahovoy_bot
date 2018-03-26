@@ -307,7 +307,7 @@ function LinkGenFondy($user_id)
     $password = $password['value'];
 
     $total_price = round(OrderSelect($user_id, 'total_price'), 2);
-    $order_id = OrderSelect($user_id, 'id');
+    $order_id = "ID".OrderSelect($user_id, 'id');
 
     $params = [
         'order_id' => $order_id,
