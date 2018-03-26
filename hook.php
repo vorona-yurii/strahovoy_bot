@@ -328,7 +328,7 @@ if($text){
         case (preg_match_all('/^\+380\d{3}\d{2}\d{2}\d{2}$/', $text) ? true : false):{
 
             $array_str = [
-                '%link%' => LinkGen($chat_id)
+                '%link%' => LinkGenFondy($chat_id)
             ];
             $reply =  strtr($lang['thank_text'], $array_str);
 
