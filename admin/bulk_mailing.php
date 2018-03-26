@@ -14,20 +14,22 @@ use Telegram\Bot\Api;
 
 if(isset($_POST['bulk'])){
 
-    $users = OrderFullUser();
+    if (!empty($_POST['bulk'])){
 
-    foreach ($users as $user){
+        $users = OrderFullUser();
 
-        $telegram = new Api(BOT_API_KEY);
+        foreach ($users as $user){
 
-        $telegram->sendMessage([
-            'chat_id' => $user['user_chat_id'],
-            'text' => $_POST['bulk'],
-            'parse_mode'=> 'HTML'
-        ]);
+            $telegram = new Api(BOT_API_KEY);
 
+            $telegram->sendMessage([
+                'chat_id' => $user['user_chat_id'],
+                'text' => $_POST['bulk'],
+                'parse_mode'=> 'HTML'
+            ]);
+
+        }
     }
-
 }
 
 ?>
