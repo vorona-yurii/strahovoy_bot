@@ -72,6 +72,7 @@ $users = OrderFullUser();
                                         <th>#</th>
                                         <th>Емейл</th>
                                         <th>Телефон</th>
+                                        <th>День рождение</th>
                                         <th>Мир</th>
                                         <th>Дата отъезда</th>
                                         <th>Дата приезда</th>
@@ -79,6 +80,7 @@ $users = OrderFullUser();
                                         <th>Тариф</th>
                                         <th>Гражд. отв.</th>
                                         <th>Багаж</th>
+                                        <th>Цена</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -87,6 +89,7 @@ $users = OrderFullUser();
                                         <th><?=$user['id']?></th>
                                         <td><?=$user['email']?></td>
                                         <td><?=$user['phone']?></td>
+                                        <td><?=$user['bithday']?></td>
                                         <td><?=$user['world']?></td>
                                         <td><?=$user['date_to']?></td>
                                         <td><?=$user['date_back']?></td>
@@ -94,6 +97,7 @@ $users = OrderFullUser();
                                         <td><?=$user['tarif']?></td>
                                         <td><?=$user['civil']?></td>
                                         <td><?=$user['baggage']?></td>
+                                        <td><?=$user['total_price']?> грн</td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
