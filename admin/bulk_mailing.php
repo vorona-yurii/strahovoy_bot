@@ -5,24 +5,29 @@
  * Date: 25.03.2018
  * Time: 2:06
  */
-require_once "../config.php";
-require_once "../function.php";
+require '../vendor/autoload.php';
 
-if(isset($_POST)){
-    setSettings('merchant_id', $_POST['merchant_id']);
-    setSettings('key_payment', $_POST['key_payment']);
-}
+require '../config.php';
+require '../function.php';
 
-if($merchant_id = getSettings('merchant_id')){
-    $merchant_id = $merchant_id['value'];
-}else{
-    $merchant_id = '';
-}
+use Telegram\Bot\Api;
 
-if($key_payment = getSettings('key_payment')){
-    $key_payment = $key_payment['value'];
-}else{
-    $key_payment = '';
+if(isset($_POST['bulk'])){
+
+    $users = OrderFullUser();
+
+    foreach ($users as $user){
+
+        $telegram = new Api(BOT_API_KEY);
+
+        $telegram->sendMessage([
+            'chat_id' => $user['user_chat_id'],
+            'text' => $_POST['bulk'],
+            'parse_mode'=> 'HTML'
+        ]);
+
+    }
+
 }
 
 ?>
@@ -63,13 +68,13 @@ if($key_payment = getSettings('key_payment')){
                     </div>
                 </li>
                 <li>
-                    <a href="index.php"><i class="fa fa-table"></i> <span class="nav-label">Таблица юзеров</span></a>
-                </li>
-                <li>
                     <a href="coefficient.php"><i class="fa fa-cog"></i> <span class="nav-label">Общий коф</span></a>
                 </li>
                 <li>
-                    <a href="bulk_mailing.php"><i class="fa fa-arrow-right"></i> <span class="nav-label">Массовая рассылка</span></a>
+                    <a href="index.php"><i class="fa fa-table"></i> <span class="nav-label">Таблица юзеров</span></a>
+                </li>
+                <li>
+                    <a href="fondy.php"><i class="fa fa-cog"></i> <span class="nav-label">Fondy</span></a>
                 </li>
             </ul>
 
@@ -84,17 +89,14 @@ if($key_payment = getSettings('key_payment')){
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal">
-                                <div class="form-group"><label class="col-sm-2 control-label">ID мерчанта:</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" name="merchant_id" value="<?=$merchant_id;?>"></div>
-                                </div>
-                                <div class="form-group"><label class="col-sm-2 control-label">Ключ платежа:</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" name="key_payment" value="<?=$key_payment;?>"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Общий коэффициент</label>
+                                    <div class="col-sm-10"><textarea name="bulk" id="bulk" cols="30" rows="10"></textarea></div>
                                 </div>
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
-                                        <button class="btn btn-primary" type="submit">Сохранить</button>
+                                        <button class="btn btn-primary" type="submit">Разослать</button>
                                     </div>
                                 </div>
                             </form>
@@ -123,4 +125,5 @@ if($key_payment = getSettings('key_payment')){
 
 </body>
 </html>
+
 

@@ -61,6 +61,9 @@ if($coff = getSettings('coff')){
                 <li>
                     <a href="fondy.php"><i class="fa fa-cog"></i> <span class="nav-label">Fondy</span></a>
                 </li>
+                <li>
+                    <a href="bulk_mailing.php"><i class="fa fa-arrow-right"></i> <span class="nav-label">Массовая рассылка</span></a>
+                </li>
             </ul>
 
         </div>
