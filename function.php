@@ -307,8 +307,10 @@ function LinkGenFondy($user_id)
     $password = $password['value'];
 
     $total_price = round(OrderSelect($user_id, 'total_price'), 2);
+    $order_id = OrderSelect($user_id, 'id');
 
     $params = [
+        'order_id' => $order_id,
         'merchant_id' => $merchant_id,
         'currency' => 'UAH',
         'lang' => 'ru',
@@ -318,7 +320,7 @@ function LinkGenFondy($user_id)
 
     $signature = getSignature($merchant_id, $password, $params);
 
-    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","currency":"UAH","params":{"lang":"ru","order_desc":"Оплата страхового полиса"},"amount":"'.$total_price.'","signature":"'.$signature.'"}';
+    $link = 'https://api.fondy.eu/api/checkout?button={"order_id":"'.$order_id.'","merchant_id":"'.$merchant_id.'","currency":"UAH","lang":"ru","order_desc":"Оплата страхового полиса","amount":"'.$total_price.'","signature":"'.$signature.'"}';
 
     return file_get_contents("https://clck.ru/--?url=".$link);
 }
