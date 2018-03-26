@@ -303,7 +303,7 @@ function LinkGenFondy($user_id)
     $merchant_id = getSettings('merchant_id');
     $password = getSettings('key_payment');
 
-    $total_price = round(OrderSelect($user_id, 'total_price'), 2;
+    $total_price = round(OrderSelect($user_id, 'total_price'), 2);
 
     $params = [
         'merchant_id' => $merchant_id,
