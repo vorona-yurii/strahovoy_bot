@@ -163,7 +163,7 @@ function getApiNBU($key)
 /**
  * @param $user_id
  */
-function OrderTotal($user_id, $forbaggage = false){
+function OrderTotal($user_id){
 
     $order = OrderFull($user_id);
 
@@ -217,26 +217,9 @@ function OrderTotal($user_id, $forbaggage = false){
         $order_total = $order_total * $coff['value'];
     }
 
-    if($forbaggage){
-        switch ($order_total){
-            case (($order_total < 250) ? true : false):{$order_total = 200;  break;}
-            case (($order_total >= 250 && $order_total < 350) ? true : false): {$order_total = 200;  break;}
-            case (($order_total >= 350 && $order_total < 450) ? true : false): {$order_total = 300;  break;}
-            case (($order_total >= 450 && $order_total < 550) ? true : false): {$order_total = 400;  break;}
-            case (($order_total >= 625 && $order_total < 875) ? true : false): {$order_total = 500;  break;}
-            case (($order_total >= 875 && $order_total < 1125) ? true : false): {$order_total = 750;  break;}
-            case (($order_total >= 1125 && $order_total < 1375) ? true : false): {$order_total = 1000; break;}
-            case (($order_total >= 1125 && $order_total < 1750) ? true : false): {$order_total = 1250;  break;}
-            case (($order_total >= 1750) ? true : false): {$order_total = 2000; break;}
-        }
-        return $order_total;
-    }
-
     if($order['baggage'] == "Да"){
         $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
     }
-
-
 
     $order_total = $order_total * getApiNBU($valut);
 
@@ -368,7 +351,7 @@ $lang = [
     "tarif_text" => "Какой тарифный план Вам посчитать?",
     "civil_text" => "Добавить гражданскую ответственность?",
     "date_bith_text" => "Пожалуйста, укажите дату рождения застрахованного в формате ДД.ММ.ГГГГ (например, 25.07.1990).",
-    "baggage_text" => "Добавить страхование багажа на %value%€/$?",
+    "baggage_text" => "Добавить страхование багажа на 500€/$?",
     "success_text" => "Расчет выполнен!
         \nТерритория страхования: %world% 
         \nПериод страхования: %date_to% - %date_back% (%days_total% д.)*
