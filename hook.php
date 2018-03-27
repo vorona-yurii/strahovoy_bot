@@ -173,7 +173,42 @@ if($text){
                 }
 
                 case "Yes_order":{
-                    $reply = $lang['success_text'];
+                    switch (OrderSelect($chat_id, 'world')){
+
+                        case "Весь мир":{
+                            $world_total1 = '50000';
+                            $world_total2 = '5000';
+                            break;
+                        }
+                        case "Вся Европа":{
+                            $world_total1 = '30000';
+                            $world_total2 = '3000';
+                            break;
+                        }
+                    }
+
+                    if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
+                        $options = 'Гражданская ответственность, Страхование багажа.';
+                    }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
+                        $options = 'Гражданская ответственность.';
+                    }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
+                        $options = 'Страхование багажа.';
+                    }else{
+                        $options = 'Нет';
+                    }
+
+                    $array_str = [
+                        '%world%' =>        OrderSelect($chat_id, 'world'),
+                        '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
+                        '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
+                        '%days_total%' =>   DaysCount($chat_id),
+                        '%world_total1%' => $world_total1,
+                        '%world_total2%' => $world_total2,
+                        '%options%' =>      $options,
+                        '%price%' =>        round(OrderTotal($chat_id), 2)
+                    ];
+
+                    $reply =  strtr($lang['success_text'], $array_str);
                     UserEvent($chat_id, 'Success');
                     $keyboard = $keyboard_civil_bag_email;
                     break;
@@ -304,12 +339,17 @@ if($text){
                         '%price%' =>        round(OrderTotal($chat_id), 2)
                     ];
 
-                    $reply =  strtr($lang['success_text'], $array_str);
 
-                    UserEvent($chat_id, 'Success');
-                    OrderEdit($chat_id, 'birthday', $text);
-                    $keyboard = $keyboard_civil_bag_email;
 
+                    if(getDiffDate($text, 'Now', 80)){
+                        $reply =  strtr($lang['success_text'], $array_str);
+                        UserEvent($chat_id, 'Success');
+                        OrderEdit($chat_id, 'birthday', $text);
+                        $keyboard = $keyboard_civil_bag_email;
+                    }else{
+                        $reply = $lang['error_birthday_text'];
+                        $keyboard = $keyboard_inf_back;
+                    }
                     break;
                 }
             }

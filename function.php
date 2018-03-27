@@ -241,6 +241,10 @@ function getDiffDate($date_to, $date_back, $diff)
         $date_to = date('d.m.Y');
     }
 
+    if($date_back == "Now") {
+        $date_back = date('d.m.Y');
+    }
+
     $date1 = strtotime($date_to);
     $date2 = strtotime($date_back);
 
@@ -366,4 +370,5 @@ $lang = [
     "thank_text" => "Спасибо за заказ!\n<a href='%link%'>Ссылка на оплату</a>",
     "error_date_to_text" => "Введите коректную дату начала путешествия, которая больше сегодняшней!!!",
     "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия хотя бы на 3 дня!!!",
+    "error_birthday_text" => 'Введите коректную дату рождения. Мы обслуживаем клиентов до 80 лет!'
 ];
