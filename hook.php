@@ -32,6 +32,10 @@ $keyboard_back = [
     ["Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
+$keyboard_back_phone = [
+    ["Отправить телефон","Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
+];
 
 $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
@@ -59,6 +63,12 @@ if($text){
     $keyboard = $keyboard_main;
 
     switch ($text){
+
+        case "yuv":{
+            $reply = json_encode($result);
+            $keyboard = $keyboard_main;
+            break;
+        }
 
         case '/start':{
             $reply = $lang['start_text'];
@@ -304,48 +314,7 @@ if($text){
                 case "Not_baggage":
                 case "Yes_baggage":{
 
-//                    switch (OrderSelect($chat_id, 'world')){
-//
-//                        case "Весь мир":{
-//                            $world_total1 = '50000';
-//                            $world_total2 = '5000';
-//                            break;
-//                        }
-//                        case "Вся Европа":{
-//                            $world_total1 = '30000';
-//                            $world_total2 = '3000';
-//                            break;
-//                        }
-//                    }
-//
-//                    if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
-//                        $options = 'Гражданская ответственность, Страхование багажа.';
-//                    }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-//                        $options = 'Гражданская ответственность.';
-//                    }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-//                        $options = 'Страхование багажа.';
-//                    }else{
-//                        $options = 'Нет';
-//                    }
-//
-//                    $array_str = [
-//                        '%world%' =>        OrderSelect($chat_id, 'world'),
-//                        '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
-//                        '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
-//                        '%days_total%' =>   DaysCount($chat_id),
-//                        '%world_total1%' => $world_total1,
-//                        '%world_total2%' => $world_total2,
-//                        '%options%' =>      $options,
-//                        '%price%' =>        round(OrderTotal($chat_id), 2)
-//                    ];
-
-
-
                     if(getDiffYear($text, 'Now', 80)){
-//                        $reply =  strtr($lang['success_text'], $array_str);
-//                        UserEvent($chat_id, 'Success');
-//                        OrderEdit($chat_id, 'birthday', $text);
-
                         $reply = $lang['phone_text'];
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
@@ -397,7 +366,6 @@ if($text){
                 '%price%' =>        round(OrderTotal($chat_id), 2)
             ];
             $reply =  strtr($lang['success_text'], $array_str);
-//            $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
             $keyboard = $keyboard_civil_bag_email;
@@ -406,12 +374,6 @@ if($text){
 
         //получаем номер телефона
         case (preg_match_all('/^\+380\d{3}\d{2}\d{2}\d{2}$/', $text) ? true : false):{
-
-//            $array_str = [
-//                '%link%' => LinkGenFondy($chat_id)
-//            ];
-//            $reply =  strtr($lang['thank_text'], $array_str);
-
 
             $reply = $lang['email_text'];
             UserEvent($chat_id, 'Phone');
@@ -497,7 +459,6 @@ if($text){
                         '%link%' => LinkGenFondy($chat_id)
                     ];
                     $reply =  strtr($lang['thank_text'], $array_str);
-                    //$reply = $lang['email_text'];
                     UserEvent($chat_id, 'Yes_order');
                     $keyboard = $keyboard_back;
                     break;
