@@ -101,7 +101,7 @@ if(isset($_GET['delete'])){
                                         <th><?=$user['id']?></th>
                                         <td><?=$user['email']?></td>
                                         <td><?=$user['phone']?></td>
-                                        <td><?=$user['bithday']?></td>
+                                        <td><?=$user['birthday']?></td>
                                         <td><?=$user['world']?></td>
                                         <td><?=$user['date_to']?></td>
                                         <td><?=$user['date_back']?></td>

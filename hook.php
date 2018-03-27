@@ -307,7 +307,7 @@ if($text){
                     $reply =  strtr($lang['success_text'], $array_str);
 
                     UserEvent($chat_id, 'Success');
-                    OrderEdit($chat_id, 'bithday', $text);
+                    OrderEdit($chat_id, 'birthday', $text);
                     $keyboard = $keyboard_civil_bag_email;
 
                     break;
