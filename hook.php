@@ -177,8 +177,8 @@ if($text){
                 }
 
                 case "Success":{
-                    $reply = $lang['email_text'];
-                    UserEvent($chat_id, 'Phone');
+                    $reply = $lang['date_bith_text'];
+                    UserEvent($chat_id, 'Work');
                     $keyboard = $keyboard_back;
                     break;
                 }
@@ -233,7 +233,7 @@ if($text){
                 }
                 case "Phone":{
                     $reply = $lang['phone_text'];
-                    UserEvent($chat_id, 'Work');
+                    UserEvent($chat_id, 'Success');
                     $keyboard = $keyboard_back;
                     break;
                 }
