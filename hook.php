@@ -33,7 +33,8 @@ $keyboard_back = [
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 $keyboard_back_phone = [
-    ["Отправить телефон","Назад"],
+    [['text'=>"SHOW PHONE",'request_contact'=>true]],
+    ["Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
@@ -59,6 +60,8 @@ $keyboard_civil_bag_email = [
 ];
 
 
+
+
 if($text){
     $keyboard = $keyboard_main;
 
@@ -78,14 +81,7 @@ if($text){
 
         case "yuv":{
             $reply = json_encode($result);
-            $keyboard = array(
-                array(
-                    array(
-                        'text'=>"SHOW PHONE",
-                        'request_contact'=>true
-                    )
-                )
-            );
+            $keyboard = $keyboard_back_phone;
             break;
 
         }
