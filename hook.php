@@ -64,10 +64,30 @@ if($text){
 
     switch ($text){
 
+        case "Отправить телефон":{
+            $keyboard = array(
+                array(
+                    array(
+                        'text'=>"SHOW PHONE",
+                        'request_contact'=>true
+                    )
+                )
+            );
+            break;
+        }
+
         case "yuv":{
             $reply = json_encode($result);
-            $keyboard = $keyboard_main;
+            $keyboard = array(
+                array(
+                    array(
+                        'text'=>"SHOW PHONE",
+                        'request_contact'=>true
+                    )
+                )
+            );
             break;
+
         }
 
         case '/start':{
