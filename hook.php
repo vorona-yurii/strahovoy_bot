@@ -216,13 +216,13 @@ if($text){
 
                 case "Email":{
                     $reply = $lang['email_text'];
-                    UserEvent($chat_id, 'Yes_order');
+                    UserEvent($chat_id, 'Phone');
                     $keyboard = $keyboard_back;
                     break;
                 }
                 case "Phone":{
                     $reply = $lang['phone_text'];
-                    UserEvent($chat_id, 'Email');
+                    UserEvent($chat_id, 'Success');
                     $keyboard = $keyboard_back;
                     break;
                 }
