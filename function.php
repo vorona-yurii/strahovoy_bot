@@ -104,7 +104,7 @@ function OrderFullUser()
 function OrderEdit($user_id, $key, $val){
 
     if(dbQuery("SELECT * FROM `orders` WHERE user_chat_id = '".$user_id."'")->fetch( PDO::FETCH_COLUMN ) == NULL) {
-        dbQuery("INSERT INTO `orders` (`user_chat_id`) VALUES ('" . $user_id . "')");
+        dbQuery("INSERT INTO `orders` (`user_chat_id`,`".$key."`) VALUES ('" . $user_id . "','".$val."')");
     }else {
         $sql = "UPDATE `orders` SET";
 
