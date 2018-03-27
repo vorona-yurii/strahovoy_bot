@@ -248,6 +248,10 @@ function getDiffDate($date_to, $date_back, $diff)
     $date1 = strtotime($date_to);
     $date2 = strtotime($date_back);
 
+    if(!$date1 || !$date2){
+        return false;
+    }
+
     if($date2 >= $date1){
         $datetime1 = new DateTime($date_to);
         $datetime2 = new DateTime($date_back);
@@ -256,13 +260,13 @@ function getDiffDate($date_to, $date_back, $diff)
         $diff_years = $interval->format('%a');
 
         if($diff_years >= $diff){
-            return $diff_years;
+            return true;
 
         }
 
-        return 'false';
+        return false;
     }
-    return 'false';
+    return false;
 }
 
 /**
@@ -283,6 +287,10 @@ function getDiffYear($date_to, $date_back, $diff)
 
     $date1 = strtotime($date_to);
     $date2 = strtotime($date_back);
+
+    if(!$date1 || !$date2){
+        return false;
+    }
 
     if($date2 >= $date1){
         $datetime1 = new DateTime($date_to);
