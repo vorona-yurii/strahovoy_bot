@@ -11,7 +11,7 @@ $telegram = new Api(BOT_API_KEY); //set api telegram bot
 $result = $telegram -> getWebhookUpdates(); //get full information about message
 
 $text = $result['message']['text']; //Text message
-$contact = $result['message']['contact'];
+$phone_number = $result['message']['contact']['phone_number'];
 $chat_id = $result['message']['chat']['id']; //id user
 $name = $result['message']['from']['username']; //Username
 
@@ -62,7 +62,7 @@ $keyboard_civil_bag_email = [
 
 $telegram->sendMessage([
         'chat_id' => $chat_id,
-        'text' => json_encode($contact)
+        'text' => $phone_number
 ]);
 
 //if($text){
