@@ -61,7 +61,7 @@ $keyboard_civil_bag_email = [
 
 $telegram->sendMessage([
         'chat_id' => $chat_id,
-        'text' => $result
+        'text' => json_encode($result)
 ]);
 
 //if($text){
