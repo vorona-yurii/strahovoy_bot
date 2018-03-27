@@ -491,7 +491,7 @@ if($text){
                     break;
                 }
 
-                //case "Success": {
+                case "Success":
                 case "Email":{
                     $array_str = [
                         '%link%' => LinkGenFondy($chat_id)
@@ -525,7 +525,7 @@ if($text){
                     break;
                 }
 
-                //case "Success": {
+                case "Success":
                 case "Email":{
                     $reply = $lang['start_text'];
                     UserEvent($chat_id, 'Null');
