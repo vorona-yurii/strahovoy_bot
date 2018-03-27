@@ -341,14 +341,14 @@ if($text){
 
 
 
-                    if(getDiffDate($text, 'Now', 80)){
+                    if(getDiffYear($text, 'Now', 80)){
                         $reply =  strtr($lang['success_text'], $array_str);
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
                         $keyboard = $keyboard_civil_bag_email;
                     }else{
                         $reply = $lang['error_birthday_text'];
-                        $keyboard = $keyboard_inf_back;
+                        $keyboard = $keyboard_back;
                     }
                     break;
                 }

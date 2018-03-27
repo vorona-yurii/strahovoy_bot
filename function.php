@@ -256,7 +256,44 @@ function getDiffDate($date_to, $date_back, $diff)
         $diff_years = $interval->format('%a');
 
         if($diff_years >= $diff){
+            return $diff_years;
+
+        }
+
+        return 'false';
+    }
+    return 'false';
+}
+
+/**
+ * @param $date_to
+ * @param $date_back
+ * @param $diff
+ * @return string
+ */
+function getDiffYear($date_to, $date_back, $diff)
+{
+    if($date_to == "Now") {
+        $date_to = date('d.m.Y');
+    }
+
+    if($date_back == "Now") {
+        $date_back = date('d.m.Y');
+    }
+
+    $date1 = strtotime($date_to);
+    $date2 = strtotime($date_back);
+
+    if($date2 >= $date1){
+        $datetime1 = new DateTime($date_to);
+        $datetime2 = new DateTime($date_back);
+        $interval = $datetime1->diff($datetime2);
+
+        $diff_years = $interval->format('%Y');
+
+        if($diff_years <= $diff){
             return true;
+
         }
 
         return false;
