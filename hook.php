@@ -319,7 +319,7 @@ if($text){
                         $reply = $lang['phone_text'];
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
-                        $keyboard = $keyboard_back;
+                        $keyboard = $keyboard_back_phone;
                     }else{
                         $reply = $lang['error_birthday_text'];
                         $keyboard = $keyboard_back;
