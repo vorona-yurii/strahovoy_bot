@@ -16,7 +16,7 @@ require_once "config.php";
  * @throws \PhpOffice\PhpSpreadsheet\Exception
  * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
  */
-function getCofFromTableExcel($sheetname = '30000', $days_count = 3, $civil = true){
+function getCofFromTableExcel($sheetname = '30000', $days_count = 3, $civil = false){
 
     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
     $reader->setLoadSheetsOnly($sheetname);

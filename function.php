@@ -176,7 +176,7 @@ function OrderTotal($user_id){
     $user_years = $interval->format('%Y');
 
     $sheetname = '';
-    $civil = true;
+    $civil = false;
     $valut = 'USD';
 
     if($order['world'] == "Вся Европа"){
