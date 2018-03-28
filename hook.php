@@ -301,7 +301,7 @@ if($text){
                         OrderEdit($chat_id, 'date_back', $text);
                         $keyboard = $keyboard_work_recreation;
                     }else{
-                        $reply = $lang['answer'];
+                        $reply = $arr['answer'];
                         $keyboard = $keyboard_inf_back;
                     }
                     break;
