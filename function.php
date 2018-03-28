@@ -40,7 +40,7 @@ $lang = [
     "error_birthday_little_text" => 'Введите, пожалуйста, коректную своего дату рождения в формате  ДД.ММ.ГГГГ.',
     "error_birthday_big_text" => 'Приносим свои извинения, но наша компания не страхует лиц которым больше чем 80 лет. Если Вы ошиблись - введите пожалуйста дату еще раз в формате  ДД.ММ.ГГГГ',
     "email_error_text" => 'Введите коректный email.',
-    "error_date_365_text" => 'Приносим свои извинения, но наша компания не страхует больше чем на год.'
+    "error_date_365_text" => 'Приносим свои извинения, но наша компания не страхует на период больше года.'
 ];
 
 /**
@@ -268,6 +268,54 @@ function OrderTotal($user_id){
  * @return bool
  */
 function getDiffDate($date_to, $date_back, $diff, $lang)
+{
+    if($date_to == "Now") {
+        $date_to = date('d.m.Y');
+    }
+
+    if($date_back == "Now") {
+        $date_back = date('d.m.Y');
+    }
+
+    $date1 = strtotime($date_to);
+    $date2 = strtotime($date_back);
+
+    if(!$date1 || !$date2){
+        return false;
+    }
+
+    if($date2 >= $date1){
+        $datetime1 = new DateTime($date_to);
+        $datetime2 = new DateTime($date_back);
+        $interval = $datetime1->diff($datetime2);
+
+        $diff_years = $interval->format('%a');
+
+        if($diff_years >= 365){
+            $arr['return'] = false;
+            $arr['answer'] = $lang['error_birthday_little_text'];
+
+            return $arr;
+        }
+
+        if($diff_years >= $diff){
+            return true;
+
+        }
+
+        return false;
+    }
+    return false;
+}
+
+/**
+ * @param $date_to
+ * @param $date_back
+ * @param $diff
+ * @param $lang
+ * @return bool
+ */
+function getDiffDateR($date_to, $date_back, $diff, $lang)
 {
     if($date_to == "Now") {
         $date_to = date('d.m.Y');

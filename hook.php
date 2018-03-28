@@ -266,26 +266,24 @@ if($text){
 
             switch (UserSelect($chat_id)){
                 case "All_World":{
-                    $arr = getDiffDate("Now", $text, 0, $lang);
-                    if($arr['return']){
+                    if(getDiffDate("Now", $text, 0)){
                         $reply = $lang['date_back'];
                         UserEvent($chat_id, 'Date_to_world');
                         OrderEdit($chat_id, 'date_to', $text);
                     }else{
-                        $reply = $arr['answer'];
+                        $reply = $lang['error_date_to_text'];
                     }
 
                     $keyboard = $keyboard_inf_back;
                     break;
                 }
                 case "All_Europe":{
-                    $arr = getDiffDate("Now", $text, 0, $lang);
-                    if($arr['return']){
+                    if(getDiffDate("Now", $text, 0)){
                         $reply = $lang['date_back'];
                         UserEvent($chat_id, 'Date_to_europe');
                         OrderEdit($chat_id, 'date_to', $text);
                     }else{
-                        $reply = $arr['answer'];
+                        $reply = $lang['error_date_to_text'];
                     }
 
                     $keyboard = $keyboard_inf_back;
@@ -295,7 +293,7 @@ if($text){
                 case "Date_to_europe":
                 case "Date_to_world":{
 
-                    $arr = getDiffDate(OrderSelect($chat_id, 'date_to'), $text, 3, $lang);
+                    $arr = getDiffDateR(OrderSelect($chat_id, 'date_to'), $text, 3, $lang);
 
                     if($arr['return']){
                         $reply = $lang['work_recreation_text'];
