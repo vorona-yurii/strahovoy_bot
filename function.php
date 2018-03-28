@@ -222,8 +222,6 @@ function OrderTotal($user_id){
 
     $order_total = $order_total * getApiNBU($valut);
 
-    return getApiNBU($valut);
-
     OrderEdit($user_id, 'total_price', $order_total);
 
     return $order_total;
