@@ -317,7 +317,7 @@ if($text){
                 case "Not_baggage":
                 case "Yes_baggage":{
 
-                    $arr = getDiffYear($text, 'Now', 80);
+                    $arr = getDiffYear($text, 'Now', 80, $lang);
 
                     if($arr['return']){
                         $reply = $lang['phone_text'];

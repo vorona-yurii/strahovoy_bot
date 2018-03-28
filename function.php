@@ -38,7 +38,7 @@ $lang = [
     "error_date_to_text" => "Введите коректную дату начала путешествия, которая больше сегодняшней!!!",
     "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия хотя бы на 3 дня!!!",
     "error_birthday_little_text" => 'Введите, пожалуйста, коректную своего дату рождения в формате  ДД.ММ.ГГГГ.',
-    "erroe_birthday_big_text" => 'Приносим свои извинения, но наша компания не страхует лиц которым больше чем 80 лет. Если Вы ошиблись - введите пожалуйста дату еще раз в формате  ДД.ММ.ГГГГ'
+    "error_birthday_big_text" => 'Приносим свои извинения, но наша компания не страхует лиц которым больше чем 80 лет. Если Вы ошиблись - введите пожалуйста дату еще раз в формате  ДД.ММ.ГГГГ'
 ];
 
 /**
@@ -305,7 +305,7 @@ function getDiffDate($date_to, $date_back, $diff)
  * @param $diff
  * @return string
  */
-function getDiffYear($date_to, $date_back, $diff)
+function getDiffYear($date_to, $date_back, $diff, $lang = array())
 {
     if($date_to == "Now") {
         $date_to = date('d.m.Y');
@@ -318,13 +318,11 @@ function getDiffYear($date_to, $date_back, $diff)
     $date1 = strtotime($date_to);
     $date2 = strtotime($date_back);
 
-    $arr = [];
-
     if(!$date1 || !$date2){
-        $arr = [
-            'return' => false,
-            'answer' => $lang['erroe_birthday_little_text']
-        ];
+
+        $arr['return'] = false;
+        $arr['answer'] = $lang['error_birthday_little_text'];
+
         return $arr;
     }
 
@@ -336,22 +334,19 @@ function getDiffYear($date_to, $date_back, $diff)
         $diff_years = $interval->format('%Y');
 
         if($diff_years <= $diff){
-            $arr = [
-                'return' => true
-                ];
+            $arr['return'] = true;
+
             return $arr;
         }
 
-        $arr = [
-            'return' => false,
-            'answer' => $lang['erroe_birthday_big_text']
-        ];
+        $arr['return'] = false;
+        $arr['answer'] = $lang['error_birthday_big_text'];
+
         return $arr;
     }
-    $arr = [
-        'return' => false,
-        'answer' => $lang['erroe_birthday_little_text']
-    ];
+    $arr['return'] = false;
+    $arr['answer'] = $lang['error_birthday_little_text'];
+
     return $arr;
 }
 
