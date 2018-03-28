@@ -329,7 +329,10 @@ function getDiffDateR($date_to, $date_back, $diff, $lang)
     $date2 = strtotime($date_back);
 
     if(!$date1 || !$date2){
-        return false;
+        $arr['return'] = false;
+        $arr['answer'] = $lang['error_date_to_text'];
+
+        return $arr;
     }
 
     if($date2 >= $date1){
@@ -339,7 +342,7 @@ function getDiffDateR($date_to, $date_back, $diff, $lang)
 
         $diff_years = $interval->format('%a');
 
-        if($diff_years >= 365){
+        if($diff_years > 365){
             $arr['return'] = false;
             $arr['answer'] = $lang['error_date_365_text'];
 
