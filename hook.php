@@ -329,7 +329,7 @@ if($text){
             break;
         }
         //получаем емейл
-        case (preg_match_all('/^(?!.*@.*@.*$)(?!.*@.*\-\-.*\..*$)(?!.*@.*\-\..*$)(?!.*@.*\-$)(.*@.+(\..{1,11})?)$/', $text) ? true : false):{
+        case (preg_match_all('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/', $text) ? true : false):{
             switch (OrderSelect($chat_id, 'world')){
 
                 case "Весь мир":{
