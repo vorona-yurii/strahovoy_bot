@@ -39,7 +39,8 @@ $lang = [
     "error_date_back_text" => "Введите коректную дату, которая больше даты начала путешествия хотя бы на 3 дня!!!",
     "error_birthday_little_text" => 'Введите, пожалуйста, коректную своего дату рождения в формате  ДД.ММ.ГГГГ.',
     "error_birthday_big_text" => 'Приносим свои извинения, но наша компания не страхует лиц которым больше чем 80 лет. Если Вы ошиблись - введите пожалуйста дату еще раз в формате  ДД.ММ.ГГГГ',
-    "email_error_text" => 'Введите коректный email.'
+    "email_error_text" => 'Введите коректный email.',
+    "error_date_365_text" => 'Приносим свои извинения, но наша компания не страхует больше чем на год.'
 ];
 
 /**
@@ -266,7 +267,7 @@ function OrderTotal($user_id){
  * @param $diff
  * @return bool
  */
-function getDiffDate($date_to, $date_back, $diff)
+function getDiffDate($date_to, $date_back, $diff, $lang)
 {
     if($date_to == "Now") {
         $date_to = date('d.m.Y');
@@ -290,14 +291,28 @@ function getDiffDate($date_to, $date_back, $diff)
 
         $diff_years = $interval->format('%a');
 
+        if($diff_years >= 365){
+            $arr['return'] = false;
+            $arr['answer'] = $lang['error_date_365_text'];
+
+            return $arr;
+        }
+
         if($diff_years >= $diff){
-            return true;
+            $arr['return'] = true;
+            return $arr;
 
         }
 
-        return false;
+        $arr['return'] = false;
+        $arr['answer'] = $lang['error_date_to_text'];
+
+        return $arr;
     }
-    return false;
+    $arr['return'] = false;
+    $arr['answer'] = $lang['error_date_to_text'];
+
+    return $arr;
 }
 
 /**
