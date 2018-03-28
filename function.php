@@ -196,7 +196,7 @@ function OrderTotal($user_id){
     $coefficient = getCofFromTableExcel($sheetname, $days_count, $civil);
 
     $order_total = $coefficient;
-
+    return $order_total;
     if($order['work_recreation'] == "Отдых"){
         $order_total = $order_total * 1.5;
     }
