@@ -150,14 +150,12 @@ function DaysCount($user_id){
  */
 function getApiNBU($key)
 {
-    $val = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'), TRUE);
-
     if($key == 'USD'){
-        return $val['34']['rate'];
+        $val = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json'), TRUE);
     }elseif($key == 'EUR'){
-        return $val['42']['rate'];
+        $val = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json'), TRUE);
     }
-
+    return $val['0']['rate'];
 }
 
 /**
