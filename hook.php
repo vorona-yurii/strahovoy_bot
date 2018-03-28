@@ -533,6 +533,11 @@ if($text){
                     $keyboard = false;
                     break;
                 }
+                default:{
+                    $reply = "По запросу <b>".$text."</b> ничего не найдено.";
+                    $keyboard = false;
+                    break;
+                }
 
             }
             break;
