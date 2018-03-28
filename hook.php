@@ -44,6 +44,7 @@ $keyboard_rp = [
 ];
 
 $keyboard_work_recreation = [
+    ["Активный отдых"],
     ["Отдых", "Работа"],
     ["Назад", "\xF0\x9F\x8F\xA0 На главную"]
 ];
@@ -144,7 +145,8 @@ if($text){
                 }
 
                 case "Work":
-                case "Recreation":{
+                case "Recreation":
+                case "Active_Recreation":{
                     $reply = $lang['work_recreation_text'];
                     UserEvent($chat_id, 'Date_back');
                     $keyboard = $keyboard_work_recreation;
@@ -387,6 +389,15 @@ if($text){
             $reply = $lang['tarif_text'];
             UserEvent($chat_id, 'Recreation');
             OrderEdit($chat_id, 'work_recreation', 'Отдых');
+            $keyboard = $keyboard_tarif;
+
+            break;
+        }
+
+        case "Активный отдых":{
+            $reply = $lang['tarif_text'];
+            UserEvent($chat_id, 'Active_Recreation');
+            OrderEdit($chat_id, 'work_recreation', 'Активный отдых');
             $keyboard = $keyboard_tarif;
 
             break;

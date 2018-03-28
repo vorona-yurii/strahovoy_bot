@@ -195,7 +195,7 @@ function OrderTotal($user_id){
 
     $order_total = $coefficient;
 
-    if($order['work_recreation'] == "Отдых"){
+    if($order['work_recreation'] == "Активный отдых"){
         $order_total = $order_total * 1.5;
     }
 
@@ -211,13 +211,12 @@ function OrderTotal($user_id){
         $order_total = $order_total * 3;
     }
 
-    if($coff = getSettings('coff')){
-        $order_total = $order_total * $coff['value'];
-    }
-
-
     if($order['baggage'] == "Да"){
         $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
+    }
+
+    if($coff = getSettings('coff')){
+        $order_total = $order_total * $coff['value'];
     }
 
     $order_total = $order_total * getApiNBU($valut);
