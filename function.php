@@ -217,13 +217,14 @@ function OrderTotal($user_id){
         $order_total = $order_total * $coff['value'];
     }
 
-    return $order_total;
 
     if($order['baggage'] == "Да"){
         $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
     }
 
     $order_total = $order_total * getApiNBU($valut);
+
+    return getApiNBU($valut);
 
     OrderEdit($user_id, 'total_price', $order_total);
 
