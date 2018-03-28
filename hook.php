@@ -317,13 +317,15 @@ if($text){
                 case "Not_baggage":
                 case "Yes_baggage":{
 
-                    if(getDiffYear($text, 'Now', 80)){
+                    $arr = getDiffYear($text, 'Now', 80);
+
+                    if($arr['return']){
                         $reply = $lang['phone_text'];
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
                         $keyboard = $keyboard_back_phone;
                     }else{
-                        $reply = $lang['error_birthday_text'];
+                        $reply = $arr['answer'];
                         $keyboard = $keyboard_back;
                     }
 
