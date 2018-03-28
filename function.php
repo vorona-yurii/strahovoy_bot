@@ -196,7 +196,7 @@ function OrderTotal($user_id){
     $coefficient = getCofFromTableExcel($sheetname, $days_count, $civil);
 
     $order_total = $coefficient;
-    return $order_total;
+
     if($order['work_recreation'] == "Отдых"){
         $order_total = $order_total * 1.5;
     }
@@ -216,6 +216,8 @@ function OrderTotal($user_id){
     if($coff = getSettings('coff')){
         $order_total = $order_total * $coff['value'];
     }
+
+    return $order_total;
 
     if($order['baggage'] == "Да"){
         $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
