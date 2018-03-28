@@ -65,12 +65,6 @@ if($text){
     $keyboard = $keyboard_main;
 
     switch ($text){
-        case "yuv":{
-            $reply = json_encode($result);
-            $keyboard = $keyboard_back_phone;
-            break;
-
-        }
 
         case '/start':{
             $reply = $lang['start_text'];
@@ -510,22 +504,63 @@ if($text){
             }
             break;
         }
+        default:{
+            switch (UserSelect($chat_id)){
+                case "All_World":
+                case "All_Europe":{
+                    $reply = $lang['error_date_to_text'];
+                    $keyboard = false;
+                    break;
+                }
+                case "Date_to_europe":
+                case "Date_to_world":{
+                    $reply = $lang['error_date_back_text'];
+                    $keyboard = false;
+                    break;
+                }
+                case "Work":
+                case "Extended_tarif":
+                case "Car_tarif":
+                case "Not_baggage":
+                case "Yes_baggage":{
+                    $reply = $lang['error_birthday_little_text'];
+                    $keyboard = false;
+                    break;
+                }
+
+                case "Phone":{
+                    $reply = $lang['email_error_text'];
+                    $keyboard = false;
+                    break;
+                }
+
+            }
+            break;
+        }
     }
 
     //отправка смс
+    if($keyboard){
+        $reply_markup = $telegram->replyKeyboardMarkup([
+            'keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => false
+        ]);
 
-    $reply_markup = $telegram->replyKeyboardMarkup([
-        'keyboard' => $keyboard,
-        'resize_keyboard' => true,
-        'one_time_keyboard' => false
-    ]);
+        $telegram->sendMessage([
+            'chat_id' => $chat_id,
+            'text' => $reply,
+            'parse_mode'=> 'HTML',
+            'reply_markup' => $reply_markup
+        ]);
+    }else{
+        $telegram->sendMessage([
+            'chat_id' => $chat_id,
+            'text' => $reply,
+            'parse_mode'=> 'HTML'
+        ]);
+    }
 
-    $telegram->sendMessage([
-        'chat_id' => $chat_id,
-        'text' => $reply,
-        'parse_mode'=> 'HTML',
-        'reply_markup' => $reply_markup
-    ]);
 
 
 }elseif($phone_number){
