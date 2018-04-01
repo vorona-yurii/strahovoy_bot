@@ -20,44 +20,46 @@ $keyboard_main = [
     ["Информация"]
 ];
 
-$keyboard_inf_back = [
-    ["Информация", "Назад"],
-    ["\xF0\x9F\x8F\xA0 На главную"]
-];
-
-$keyboard_home = [
-    ["Домой"]
-];
-
 $keyboard_back = [
+    ['Информация'],
     ["Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 $keyboard_back_phone = [
     [['text'=>"Отправить телефон",'request_contact'=>true]],
-    ["Назад","\xF0\x9F\x8F\xA0 На главную"]
+    ['Информация'],
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_rp = [
     ["Весь мир", "Вся Европа"],
-    ["Назад"]
+    ['Информация'],
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_work_recreation = [
     ["Активный отдых"],
     ["Отдых", "Работа"],
-    ["Назад", "\xF0\x9F\x8F\xA0 На главную"]
+    ['Информация'],
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_tarif = [
     ["Стандарт", "Расширенный"],
     ["Путешествие на авто"],
-    ["Назад", "\xF0\x9F\x8F\xA0 На главную"]
+    ['Информация'],
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_civil_bag_email = [
     ["\xF0\x9F\x93\x83 Да", "\xE2\x9D\x8C Нет"],
-    ["Назад", "\xF0\x9F\x8F\xA0 На главную"]
+    ['Информация'],
+    ["Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 
@@ -76,8 +78,7 @@ if($text){
 
         case 'Информация':{
             $reply = $lang['information_text'];
-            UserEvent($chat_id, 'Null');
-            $keyboard = $keyboard_home;
+            $keyboard = false;
 
             break;
         }
@@ -109,13 +110,13 @@ if($text){
                 case "Date_to_europe":{
                     $reply = $lang['all_europe_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_Europe');
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_back;
                     break;
                 }
                 case "Date_to_world":{
                     $reply = $lang['all_world_text'] . $lang['dateto_text'];
                     UserEvent($chat_id, 'All_World');
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_back;
                     break;
                 }
 
@@ -134,7 +135,7 @@ if($text){
                         }
                     }
 
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_back;
                     break;
                 }
 
@@ -250,7 +251,7 @@ if($text){
             $reply = $lang['all_europe_text'] . $lang['dateto_text'];
             UserEvent($chat_id, 'All_Europe');
             OrderEdit($chat_id, 'world', 'Вся Европа');
-            $keyboard = $keyboard_inf_back;
+            $keyboard = $keyboard_back;
             break;
         }
 
@@ -258,11 +259,11 @@ if($text){
             $reply = $lang['all_world_text'] . $lang['dateto_text'];
             UserEvent($chat_id, 'All_World');
             OrderEdit($chat_id, 'world', 'Весь мир');
-            $keyboard = $keyboard_inf_back;
+            $keyboard = $keyboard_back;
             break;
         }
         //получаем дату а в формате xx.xx.xxxx
-        case (preg_match_all('/^[1-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}$/', $text) ? true : false):{
+        case (preg_match_all('/^[0-3]{1}[0-9]{1}[.]{1}[0-1]{1}[0-9]{1}[.]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}$/', $text) ? true : false):{
 
             switch (UserSelect($chat_id)){
                 case "All_World":{
@@ -274,7 +275,7 @@ if($text){
                         $reply = $lang['error_date_to_text'];
                     }
 
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_back;
                     break;
                 }
                 case "All_Europe":{
@@ -286,7 +287,7 @@ if($text){
                         $reply = $lang['error_date_to_text'];
                     }
 
-                    $keyboard = $keyboard_inf_back;
+                    $keyboard = $keyboard_back;
                     break;
                 }
 
@@ -302,7 +303,7 @@ if($text){
                         $keyboard = $keyboard_work_recreation;
                     }else{
                         $reply = $arr['answer'];
-                        $keyboard = $keyboard_inf_back;
+                        $keyboard = $keyboard_back;
                     }
                     break;
                 }
