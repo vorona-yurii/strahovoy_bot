@@ -225,7 +225,7 @@ if($text){
                 case "Phone":{
                     $reply = $lang['phone_text'];
                     UserEvent($chat_id, 'Success');
-                    $keyboard = $keyboard_back;
+                    $keyboard = $keyboard_back_phone;
                     break;
                 }
 
