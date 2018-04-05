@@ -108,16 +108,16 @@ if($text){
         case "Назад":{
             switch (UserSelect($chat_id)){
                 case "RP": {
-                    $reply = $lang['type_text'];
+                    $reply = $lang['start_text'];
                     UserEvent($chat_id, 'Null');
-                    $keyboard = $keyboard_type;
+                    $keyboard = $keyboard_main;
                     break;
                 }
                 case "Type1":
                 case "Type2":{
-                    $reply = $lang['start_text'];
+                    $reply = $lang['type_text'];
                     UserEvent($chat_id, 'RP');
-                    $keyboard = $keyboard_rp;
+                    $keyboard = $keyboard_type;
                     break;
                 }
 
