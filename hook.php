@@ -250,6 +250,12 @@ if($text){
                     $keyboard = $keyboard_back_phone;
                     break;
                 }
+                case "Yes_Manager":{
+                    $reply = $lang['manager_text'];
+                    UserEvent($chat_id, 'Success');
+                    $keyboard = $keyboard_manager;
+                    break;
+                }
 
             }
             break;
