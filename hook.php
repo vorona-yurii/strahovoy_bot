@@ -256,7 +256,9 @@ if($text){
         }
 
         case "Связаться с менеджером":{
-
+            $reply = $lang['phone_text'];
+            UserEvent($chat_id, 'Yes_Manager');
+            $keyboard = $keyboard_back_phone;
             break;
         }
 
