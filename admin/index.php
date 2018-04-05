@@ -91,7 +91,6 @@ if(isset($_GET['delete'])){
                                         <th>Отдых или работа</th>
                                         <th>Тариф</th>
                                         <th>Гражд. отв.</th>
-                                        <th>Багаж</th>
                                         <th>Цена</th>
                                         <th></th>
                                     </tr>
@@ -109,7 +108,6 @@ if(isset($_GET['delete'])){
                                         <td><?=$user['work_recreation']?></td>
                                         <td><?=$user['tarif']?></td>
                                         <td><?=$user['civil']?></td>
-                                        <td><?=$user['baggage']?></td>
                                         <td><?=round($user['total_price'], 2)?> грн</td>
                                         <td><a class="del-btn" href="index.php?delete=<?=$user['id']?>">Удалить</a></td>
                                     </tr>
