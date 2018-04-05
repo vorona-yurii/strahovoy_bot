@@ -291,6 +291,10 @@ if($text){
         case "Связаться с менеджером":{
             $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Yes_Manager');
+            OrderEdit($chat_id, 'name', '-');
+            OrderEdit($chat_id, 'pass', '-');
+            OrderEdit($chat_id, 'inn', '-');
+            OrderEdit($chat_id, 'adress', '-');
             $keyboard = $keyboard_back_phone;
             break;
         }
