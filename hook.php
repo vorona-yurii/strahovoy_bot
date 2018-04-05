@@ -258,7 +258,7 @@ if($text){
                     break;
                 }
                 case "Name":{
-                    $reply = $lang['enter_name_text_text'];
+                    $reply = $lang['enter_name_text'];
                     UserEvent($chat_id, 'Not_Manager');
                     $keyboard = $keyboard_back;
                     break;
