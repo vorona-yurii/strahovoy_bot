@@ -171,7 +171,8 @@ if($text){
 
                 case "Extended_tarif":
                 case "Car_tarif":
-                case "Standart_tarif":{
+                case "Standart_tarif":
+                case "Standart_tarif_recretion":{
                     $reply = $lang['tarif_text'];
                     UserEvent($chat_id, 'Recreation');
                     $keyboard = $keyboard_tarif;
@@ -450,6 +451,7 @@ if($text){
                     $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Standart_tarif_recretion');
                     OrderEdit($chat_id, 'civil', '-');
+                    $keyboard = $keyboard_back;
                     break;
                 }
             }
