@@ -250,13 +250,40 @@ if($text){
                     $keyboard = $keyboard_back_phone;
                     break;
                 }
-                case "Yes_Manager":{
+                case "Yes_Manager":
+                case "Not_Manager":{
                     $reply = $lang['manager_text'];
                     UserEvent($chat_id, 'Success');
                     $keyboard = $keyboard_manager;
                     break;
                 }
+                case "Name":{
+                    $reply = $lang['enter_name_text_text'];
+                    UserEvent($chat_id, 'Not_Manager');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
 
+                case "Pass":{
+                    $reply = $lang['enter_pass_text'];
+                    UserEvent($chat_id, 'Name');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "INN":{
+                    $reply = $lang['enter_inn_text'];
+                    UserEvent($chat_id, 'Pass');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "Adress":{
+                    $reply = $lang['enter_adress_text'];
+                    UserEvent($chat_id, 'INN');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
             }
             break;
         }
@@ -269,7 +296,9 @@ if($text){
         }
 
         case "Оформить полис онлайн":{
-
+            $reply = $lang['enter_name_text'];
+            UserEvent($chat_id, 'Not_Manager');
+            $keyboard = $keyboard_back;
             break;
         }
 
@@ -565,6 +594,38 @@ if($text){
                     $keyboard = false;
                     break;
                 }
+                case "Not_Manager":{
+                    $reply = $lang['enter_pass_text'];
+                    UserEvent($chat_id, 'Name');
+                    OrderEdit($chat_id, 'name', $text);
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "Name":{
+                    $reply = $lang['enter_inn_text'];
+                    UserEvent($chat_id, 'Pass');
+                    OrderEdit($chat_id, 'pass', $text);
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "Pass":{
+                    $reply = $lang['enter_adress_text'];
+                    UserEvent($chat_id, 'INN');
+                    OrderEdit($chat_id, 'inn', $text);
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+
+                case "INN":{
+                    $reply = $lang['phone_text'];
+                    UserEvent($chat_id, 'Adress');
+                    OrderEdit($chat_id, 'adress', $text);
+                    $keyboard = $keyboard_back_phone;
+                    break;
+                }
+
                 default:{
                     $reply = "По запросу <b>".$text."</b> ничего не найдено.";
                     $keyboard = false;
