@@ -50,7 +50,7 @@ $keyboard_tarif = [
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
-$keyboard_civil_bag_email = [
+$keyboard_civil_email = [
     ["\xF0\x9F\x93\x83 Да", "\xE2\x9D\x8C Нет"],
     ["Информация","Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
@@ -183,17 +183,9 @@ if($text){
                 case "Yes_civil": {
                     $reply = $lang['civil_text'];
                     UserEvent($chat_id, 'Standart_tarif');
-                    $keyboard = $keyboard_civil_bag_email;
+                    $keyboard = $keyboard_civil_email;
                     break;
                 }
-
-//                case "Not_baggage":
-//                case "Yes_baggage": {
-//                    $reply = $lang['baggage_text'];
-//                    UserEvent($chat_id, 'Yes_civil');
-//                    $keyboard = $keyboard_civil_bag_email;
-//                    break;
-//                }
 
                 case "Success":{
                     $reply = $lang['date_bith_text'];
@@ -217,12 +209,8 @@ if($text){
                         }
                     }
 
-                    if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
-                        $options = 'Гражданская ответственность, Страхование багажа.';
-                    }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                        $options = 'Гражданская ответственность.';
-                    }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                        $options = 'Страхование багажа.';
+                    if(OrderSelect($chat_id, 'civil') == "Да"){
+                        $options = 'Гражданская ответственность';
                     }else{
                         $options = 'Нет';
                     }
@@ -240,7 +228,7 @@ if($text){
 
                     $reply =  strtr($lang['success_text'], $array_str);
                     UserEvent($chat_id, 'Success');
-                    $keyboard = $keyboard_civil_bag_email;
+                    $keyboard = $keyboard_civil_email;
                     break;
                 }
 
@@ -361,21 +349,19 @@ if($text){
                 case "Весь мир":{
                     $world_total1 = '50000';
                     $world_total2 = '5000';
+                    $text_europe = '';
                     break;
                 }
                 case "Вся Европа":{
                     $world_total1 = '30000';
                     $world_total2 = '3000';
+                    $text_europe = $lang['europe_order_text'];
                     break;
                 }
             }
 
-            if(OrderSelect($chat_id, 'civil') == "Да" && OrderSelect($chat_id, 'baggage') == "Да"){
-                $options = 'Гражданская ответственность, Страхование багажа.';
-            }elseif(OrderSelect($chat_id, 'civil') == "Да" && (OrderSelect($chat_id, 'baggage') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                $options = 'Гражданская ответственность.';
-            }elseif(OrderSelect($chat_id, 'baggage') == "Да" && (OrderSelect($chat_id, 'civil') == "Нет" || OrderSelect($chat_id, 'baggage') == "-")){
-                $options = 'Страхование багажа.';
+            if(OrderSelect($chat_id, 'civil') == "Да"){
+                $options = 'Гражданская ответственность';
             }else{
                 $options = 'Нет';
             }
@@ -385,6 +371,7 @@ if($text){
                 '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
                 '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
                 '%days_total%' =>   DaysCount($chat_id),
+                '%text_europe%'=>   $text_europe,
                 '%world_total1%' => $world_total1,
                 '%world_total2%' => $world_total2,
                 '%options%' =>      $options,
@@ -393,7 +380,7 @@ if($text){
             $reply =  strtr($lang['success_text'], $array_str);
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
-            $keyboard = $keyboard_civil_bag_email;
+            $keyboard = $keyboard_civil_email;
             break;
         }
 
@@ -431,7 +418,6 @@ if($text){
             OrderEdit($chat_id, 'work_recreation', 'Работа');
             OrderEdit($chat_id, 'tarif', '-');
             OrderEdit($chat_id, 'civil', '-');
-            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -445,7 +431,7 @@ if($text){
                     $reply = $lang['civil_text'];
                     UserEvent($chat_id, 'Standart_tarif');
                     OrderEdit($chat_id, 'tarif', 'Стандарт');
-                    $keyboard = $keyboard_civil_bag_email;
+                    $keyboard = $keyboard_civil_email;
                     break;
                 }
                 case "Отдых":{
@@ -465,7 +451,6 @@ if($text){
             UserEvent($chat_id, 'Extended_tarif');
             OrderEdit($chat_id, 'tarif', 'Расширенный');
             OrderEdit($chat_id, 'civil', '-');
-            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -476,7 +461,6 @@ if($text){
             UserEvent($chat_id, 'Car_tarif');
             OrderEdit($chat_id, 'tarif', 'Путешествие на авто');
             OrderEdit($chat_id, 'civil', '-');
-            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -491,15 +475,6 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
-
-//                case 'Not_civil':
-//                case 'Yes_civil': {
-//                    $reply = $lang['date_bith_text'];
-//                    UserEvent($chat_id, 'Yes_baggage');
-//                    OrderEdit($chat_id, 'baggage', 'Да');
-//                    $keyboard = $keyboard_back;
-//                    break;
-//                }
 
                 case "Success":
                 case "Email":{
@@ -524,15 +499,6 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
-//
-//                case 'Yes_civil':
-//                case 'Not_civil': {
-//                    $reply = $lang['date_bith_text'];
-//                    UserEvent($chat_id, 'Not_baggage');
-//                    OrderEdit($chat_id, 'baggage', 'Нет');
-//                    $keyboard = $keyboard_back;
-//                    break;
-//                }
 
                 case "Success":
                 case "Email":{
