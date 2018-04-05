@@ -186,13 +186,13 @@ if($text){
                     break;
                 }
 
-                case "Not_baggage":
-                case "Yes_baggage": {
-                    $reply = $lang['baggage_text'];
-                    UserEvent($chat_id, 'Yes_civil');
-                    $keyboard = $keyboard_civil_bag_email;
-                    break;
-                }
+//                case "Not_baggage":
+//                case "Yes_baggage": {
+//                    $reply = $lang['baggage_text'];
+//                    UserEvent($chat_id, 'Yes_civil');
+//                    $keyboard = $keyboard_civil_bag_email;
+//                    break;
+//                }
 
                 case "Success":{
                     $reply = $lang['date_bith_text'];
@@ -429,17 +429,30 @@ if($text){
             OrderEdit($chat_id, 'work_recreation', 'Работа');
             OrderEdit($chat_id, 'tarif', '-');
             OrderEdit($chat_id, 'civil', '-');
-            OrderEdit($chat_id, 'baggage', '-');
+            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
         }
 
         case 'Стандарт':{
-            $reply = $lang['civil_text'];
-            UserEvent($chat_id, 'Standart_tarif');
-            OrderEdit($chat_id, 'tarif', 'Стандарт');
-            $keyboard = $keyboard_civil_bag_email;
+
+            switch (OrderSelect($chat_id, 'work_recreation')){
+
+                case "Активный отдых":{
+                    $reply = $lang['civil_text'];
+                    UserEvent($chat_id, 'Standart_tarif');
+                    OrderEdit($chat_id, 'tarif', 'Стандарт');
+                    $keyboard = $keyboard_civil_bag_email;
+                    break;
+                }
+                case "Отдых":{
+                    $reply = $lang['date_bith_text'];
+                    UserEvent($chat_id, 'Standart_tarif_recretion');
+                    OrderEdit($chat_id, 'civil', '-');
+                    break;
+                }
+            }
 
             break;
         }
@@ -449,7 +462,7 @@ if($text){
             UserEvent($chat_id, 'Extended_tarif');
             OrderEdit($chat_id, 'tarif', 'Расширенный');
             OrderEdit($chat_id, 'civil', '-');
-            OrderEdit($chat_id, 'baggage', '-');
+            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
@@ -460,7 +473,7 @@ if($text){
             UserEvent($chat_id, 'Car_tarif');
             OrderEdit($chat_id, 'tarif', 'Путешествие на авто');
             OrderEdit($chat_id, 'civil', '-');
-            OrderEdit($chat_id, 'baggage', '-');
+            //OrderEdit($chat_id, 'baggage', '-');
             $keyboard = $keyboard_back;
 
             break;
