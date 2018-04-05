@@ -82,6 +82,10 @@ if(isset($_GET['delete'])){
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Имя</th>
+                                        <th>Паспорт</th>
+                                        <th>ИНН</th>
+                                        <th>Адрес</th>
                                         <th>Емейл</th>
                                         <th>Телефон</th>
                                         <th>День рождение</th>
@@ -99,6 +103,10 @@ if(isset($_GET['delete'])){
                                     <?php foreach ($users as $user){?>
                                     <tr>
                                         <th><?=$user['id']?></th>
+                                        <td><?=$user['name']?></td>
+                                        <td><?=$user['pass']?></td>
+                                        <td><?=$user['inn']?></td>
+                                        <td><?=$user['adress']?></td>
                                         <td><?=$user['email']?></td>
                                         <td><?=$user['phone']?></td>
                                         <td><?=$user['birthday']?></td>
