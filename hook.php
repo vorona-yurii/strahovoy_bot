@@ -599,10 +599,16 @@ if($text){
                     break;
                 }
                 case "Not_Manager":{
-                    $reply = $lang['enter_pass_text'];
-                    UserEvent($chat_id, 'Name');
-                    OrderEdit($chat_id, 'name', $text);
-                    $keyboard = $keyboard_back;
+                    if(preg_match('/[^a-zA-Z ]/', $text)){
+                        $reply = $lang['enter_pass_text'];
+                        UserEvent($chat_id, 'Name');
+                        OrderEdit($chat_id, 'name', $text);
+                        $keyboard = $keyboard_back;
+                    }else{
+                        $reply = $lang['error_name_text'];
+                        $keyboard = false;
+                    }
+
                     break;
                 }
 
