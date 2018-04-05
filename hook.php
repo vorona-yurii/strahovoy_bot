@@ -601,7 +601,7 @@ if($text){
 
                 case "Not_Manager":{
                     switch ($text){
-                        case (preg_match_all('/[^A-Z ]/', $text) ? false : true):{
+                        case (preg_match_all('/[^a-zA-Z ]/', $text) ? false : true):{
                             $reply = $lang['enter_pass_text'];
                             UserEvent($chat_id, 'Name');
                             OrderEdit($chat_id, 'name', $text);
