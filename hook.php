@@ -619,26 +619,62 @@ if($text){
                 }
 
                 case "Name":{
-                    $reply = $lang['enter_inn_text'];
-                    UserEvent($chat_id, 'Pass');
-                    OrderEdit($chat_id, 'pass', $text);
-                    $keyboard = $keyboard_back;
+                    switch ($text){
+                        case (preg_match_all('/^[A-Z]{2} [0-9]{6}$/', $text) ? true : false):{
+                            $reply = $lang['enter_inn_text'];
+                            UserEvent($chat_id, 'Pass');
+                            OrderEdit($chat_id, 'pass', $text);
+                            $keyboard = $keyboard_back;
+                            break;
+                        }
+
+                        default:{
+                            $reply = $lang['error_pass_text'];
+                            $keyboard = false;
+                            break;
+                        }
+                    }
+
                     break;
                 }
 
                 case "Pass":{
-                    $reply = $lang['enter_adress_text'];
-                    UserEvent($chat_id, 'INN');
-                    OrderEdit($chat_id, 'inn', $text);
-                    $keyboard = $keyboard_back;
+                    switch ($text){
+                        case (preg_match_all('/^[0-9]{10}$/', $text) ? true : false):{
+                            $reply = $lang['enter_adress_text'];
+                            UserEvent($chat_id, 'INN');
+                            OrderEdit($chat_id, 'inn', $text);
+                            $keyboard = $keyboard_back;
+                            break;
+                        }
+
+                        default:{
+                            $reply = $lang['error_inn_text'];
+                            $keyboard = false;
+                            break;
+                        }
+                    }
+
                     break;
                 }
 
                 case "INN":{
-                    $reply = $lang['phone_text'];
-                    UserEvent($chat_id, 'Adress');
-                    OrderEdit($chat_id, 'adress', $text);
-                    $keyboard = $keyboard_back_phone;
+                    switch ($text){
+                        case (preg_match_all('/[^A-Z0-9 ]$/', $text) ? false : true):{
+                            $reply = $lang['phone_text'];
+                            UserEvent($chat_id, 'Adress');
+                            OrderEdit($chat_id, 'adress', $text);
+                            $keyboard = $keyboard_back_phone;
+                            break;
+                        }
+
+                        default:{
+                            $reply = $lang['error_adress_text'];
+                            $keyboard = false;
+                            break;
+                        }
+                    }
+
                     break;
                 }
 
