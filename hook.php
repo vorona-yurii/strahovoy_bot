@@ -62,6 +62,12 @@ $keyboard_type = [
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
+$keyboard_manager = [
+    ["Связаться с менеджером", "Оформить полис онлайн"],
+    ["Информация","Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
+];
+
 
 if($text){
     $keyboard = $keyboard_main;
@@ -249,6 +255,16 @@ if($text){
             break;
         }
 
+        case "Связаться с менеджером":{
+
+            break;
+        }
+
+        case "Оформить полис онлайн":{
+
+            break;
+        }
+
         case "\xF0\x9F\x8F\xA0 На главную":
         case "Домой":{
             $reply = $lang['start_text'];
@@ -328,10 +344,11 @@ if($text){
                     $arr = getDiffYear($text, 'Now', 80, $lang);
 
                     if($arr['return']){
-                        $reply = $lang['phone_text'];
+                        //$reply = $lang['phone_text'];
+                        $reply = $lang['manager_text'];
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
-                        $keyboard = $keyboard_back_phone;
+                        $keyboard = $keyboard_manager;
                     }else{
                         $reply = $arr['answer'];
                         $keyboard = $keyboard_back;
