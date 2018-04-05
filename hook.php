@@ -56,6 +56,12 @@ $keyboard_civil_bag_email = [
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
+$keyboard_type = [
+    ["Одноразовая: (до 30 дней)", "Многоразовая: (от 60 – 365)"],
+    ["Информация","Назад"],
+    ["\xF0\x9F\x8F\xA0 На главную"]
+];
+
 
 if($text){
     $keyboard = $keyboard_main;
@@ -78,8 +84,22 @@ if($text){
         }
 
         case "\xF0\x9F\x93\x83 Расчитать полис":{
-            $reply = $lang['rp_text'];
+            $reply = $lang['type_text'];
             UserEvent($chat_id, 'RP');
+            $keyboard = $keyboard_type;
+
+            break;
+        }
+        case "Одноразовая: (до 30 дней)":{
+            $reply = $lang['rp_text'];
+            UserEvent($chat_id, 'Type1');
+            $keyboard = $keyboard_rp;
+
+            break;
+        }
+        case "Многоразовая: (от 60 – 365)":{
+            $reply = $lang['rp_text'];
+            UserEvent($chat_id, 'Type2');
             $keyboard = $keyboard_rp;
 
             break;
@@ -88,16 +108,23 @@ if($text){
         case "Назад":{
             switch (UserSelect($chat_id)){
                 case "RP": {
-                    $reply = $lang['start_text'];
+                    $reply = $lang['type_text'];
                     UserEvent($chat_id, 'Null');
-                    $keyboard = $keyboard_main;
+                    $keyboard = $keyboard_type;
+                    break;
+                }
+                case "Type1":
+                case "Type2":{
+                    $reply = $lang['start_text'];
+                    UserEvent($chat_id, 'RP');
+                    $keyboard = $keyboard_rp;
                     break;
                 }
 
                 case "All_Europe":
                 case "All_World":{
                     $reply = $lang['rp_text'];
-                    UserEvent($chat_id, 'RP');
+                    UserEvent($chat_id, 'Type1');
                     $keyboard = $keyboard_rp;
                     break;
                 }
