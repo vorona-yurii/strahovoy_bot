@@ -598,22 +598,30 @@ if($text){
                     $keyboard = false;
                     break;
                 }
-                case "Not_Manager":{
-                    switch ($text){
-                        case (preg_match_all('/[^A-Z ]/', $text) ? true : false):{
-                            $reply = $lang['enter_pass_text'];
-                            UserEvent($chat_id, 'Name');
-                            OrderEdit($chat_id, 'name', $text);
-                            $keyboard = $keyboard_back;
-                            break;
-                        }
 
-                        default:{
-                            $reply = $lang['error_name_text'];
-                            $keyboard = false;
-                            break;
-                        }
+                case "Not_Manager":{
+//                    switch ($text){
+//                        case (preg_match_all('/[^A-Z ]/', $text) ? true : false):{
+//                            $reply = $lang['enter_pass_text'];
+//                            UserEvent($chat_id, 'Name');
+//                            OrderEdit($chat_id, 'name', $text);
+//                            $keyboard = $keyboard_back;
+//                            break;
+//                        }
+//
+//                        default:{
+//                            $reply = $lang['error_name_text'];
+//                            $keyboard = false;
+//                            break;
+//                        }
+//                    }
+
+                    if(1){
+                        $reply = '1';
+                    }else{
+                        $reply = '2';
                     }
+                    $keyboard = false;
                     break;
                 }
 
