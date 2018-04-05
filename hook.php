@@ -333,8 +333,9 @@ if($text){
                 case "Work":
                 case "Extended_tarif":
                 case "Car_tarif":
-                case "Not_baggage":
-                case "Yes_baggage":{
+                case "Not_civil":
+                case "Yes_civil":
+                case "Standart_tarif_recretion":{
 
                     $arr = getDiffYear($text, 'Now', 80, $lang);
 
@@ -484,21 +485,21 @@ if($text){
         case "\xF0\x9F\x93\x83 Да":{
             switch (UserSelect($chat_id)){
                 case 'Standart_tarif': {
-                    $reply = $lang['baggage_text'];
+                    $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Yes_civil');
                     OrderEdit($chat_id, 'civil', 'Да');
-                    $keyboard = $keyboard_civil_bag_email;
-                    break;
-                }
-
-                case 'Not_civil':
-                case 'Yes_civil': {
-                    $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Yes_baggage');
-                    OrderEdit($chat_id, 'baggage', 'Да');
                     $keyboard = $keyboard_back;
                     break;
                 }
+
+//                case 'Not_civil':
+//                case 'Yes_civil': {
+//                    $reply = $lang['date_bith_text'];
+//                    UserEvent($chat_id, 'Yes_baggage');
+//                    OrderEdit($chat_id, 'baggage', 'Да');
+//                    $keyboard = $keyboard_back;
+//                    break;
+//                }
 
                 case "Success":
                 case "Email":{
@@ -517,21 +518,21 @@ if($text){
         case "\xE2\x9D\x8C Нет":{
             switch (UserSelect($chat_id)){
                 case 'Standart_tarif': {
-                    $reply = $lang['baggage_text'];
+                    $reply = $lang['date_bith_text'];
                     UserEvent($chat_id, 'Not_civil');
                     OrderEdit($chat_id, 'civil', 'Нет');
-                    $keyboard = $keyboard_civil_bag_email;
-                    break;
-                }
-
-                case 'Yes_civil':
-                case 'Not_civil': {
-                    $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Not_baggage');
-                    OrderEdit($chat_id, 'baggage', 'Нет');
                     $keyboard = $keyboard_back;
                     break;
                 }
+//
+//                case 'Yes_civil':
+//                case 'Not_civil': {
+//                    $reply = $lang['date_bith_text'];
+//                    UserEvent($chat_id, 'Not_baggage');
+//                    OrderEdit($chat_id, 'baggage', 'Нет');
+//                    $keyboard = $keyboard_back;
+//                    break;
+//                }
 
                 case "Success":
                 case "Email":{
@@ -560,8 +561,9 @@ if($text){
                 case "Work":
                 case "Extended_tarif":
                 case "Car_tarif":
-                case "Not_baggage":
-                case "Yes_baggage":{
+                case "Not_civil":
+                case "Yes_civil":
+                case "Standart_tarif_recretion":{
                     $reply = $lang['error_birthday_little_text'];
                     $keyboard = false;
                     break;
