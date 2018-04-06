@@ -63,7 +63,7 @@ $keyboard_type = [
 ];
 
 $keyboard_manager = [
-    ["Связаться с менеджером", "Оформить полис онлайн"],
+    ["Да. Связаться с менеджером", "Нет. Оформить полис онлайн"],
     ["Информация","Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
@@ -234,7 +234,7 @@ if($text){
 
                     $reply =  strtr($lang['success_text'], $array_str);
                     UserEvent($chat_id, 'Success');
-                    $keyboard = $keyboard_civil_email;
+                    $keyboard = $keyboard_manager;
                     break;
                 }
 
@@ -288,7 +288,7 @@ if($text){
             break;
         }
 
-        case "Связаться с менеджером":{
+        case "Да. Связаться с менеджером":{
             $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Yes_Manager');
             OrderEdit($chat_id, 'name', '-');
@@ -299,7 +299,7 @@ if($text){
             break;
         }
 
-        case "Оформить полис онлайн":{
+        case "Нет. Оформить полис онлайн":{
             $reply = $lang['enter_name_text'];
             UserEvent($chat_id, 'Not_Manager');
             $keyboard = $keyboard_back;
@@ -424,7 +424,7 @@ if($text){
                         $reply =  strtr($lang['success_text'], $array_str);
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
-                        $keyboard = $keyboard_civil_email;
+                        $keyboard = $keyboard_manager;
                         break;
                     }else{
                         $reply = $arr['answer'];
