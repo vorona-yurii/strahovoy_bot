@@ -8,7 +8,7 @@
 require_once "../config.php";
 require_once "../function.php";
 
-$users = OrderFullUser();
+$users = OrderFullOrders();
 
 if(isset($_GET['delete'])){
     OrderDeleteUser($_GET['delete']);

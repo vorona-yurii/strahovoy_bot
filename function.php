@@ -143,6 +143,16 @@ function OrderFullUser()
 }
 
 /**
+ * @return array
+ */
+function OrderFullOrders()
+{
+    $result =  dbQuery("SELECT * FROM `orders`")->fetchAll( PDO::FETCH_ASSOC );
+
+    return $result;
+}
+
+/**
  * @param $user_id
  * @param $key
  * @param $val
