@@ -385,11 +385,47 @@ if($text){
                     $arr = getDiffYear($text, 'Now', 80, $lang);
 
                     if($arr['return']){
-                        //$reply = $lang['phone_text'];
-                        $reply = $lang['manager_text'];
+                        //$reply = $lang['manager_text'];
+
+                        //$keyboard = $keyboard_manager;
+                        switch (OrderSelect($chat_id, 'world')){
+
+                            case "Весь мир":{
+                                $world_total1 = '50000';
+                                $world_total2 = '5000';
+                                $text_europe = '';
+                                break;
+                            }
+                            case "Вся Европа":{
+                                $world_total1 = '30000';
+                                $world_total2 = '3000';
+                                $text_europe = $lang['europe_order_text'];
+                                break;
+                            }
+                        }
+
+                        if(OrderSelect($chat_id, 'civil') == "Да"){
+                            $options = 'Гражданская ответственность';
+                        }else{
+                            $options = 'Нет';
+                        }
+
+                        $array_str = [
+                            '%world%' =>        OrderSelect($chat_id, 'world'),
+                            '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
+                            '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
+                            '%days_total%' =>   DaysCount($chat_id),
+                            '%text_europe%'=>   $text_europe,
+                            '%world_total1%' => $world_total1,
+                            '%world_total2%' => $world_total2,
+                            '%options%' =>      $options,
+                            '%price%' =>        round(OrderTotal($chat_id), 2)
+                        ];
+                        $reply =  strtr($lang['success_text'], $array_str);
                         UserEvent($chat_id, 'Success');
                         OrderEdit($chat_id, 'birthday', $text);
-                        $keyboard = $keyboard_manager;
+                        $keyboard = $keyboard_civil_email;
+                        break;
                     }else{
                         $reply = $arr['answer'];
                         $keyboard = $keyboard_back;
@@ -402,44 +438,44 @@ if($text){
         }
         //получаем емейл
         case (preg_match_all('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]i+)*\.[a-z]{2,6}$/i', $text) ? true : false):{
-            switch (OrderSelect($chat_id, 'world')){
-
-                case "Весь мир":{
-                    $world_total1 = '50000';
-                    $world_total2 = '5000';
-                    $text_europe = '';
-                    break;
-                }
-                case "Вся Европа":{
-                    $world_total1 = '30000';
-                    $world_total2 = '3000';
-                    $text_europe = $lang['europe_order_text'];
-                    break;
-                }
-            }
-
-            if(OrderSelect($chat_id, 'civil') == "Да"){
-                $options = 'Гражданская ответственность';
-            }else{
-                $options = 'Нет';
-            }
-
-            $array_str = [
-                '%world%' =>        OrderSelect($chat_id, 'world'),
-                '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
-                '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
-                '%days_total%' =>   DaysCount($chat_id),
-                '%text_europe%'=>   $text_europe,
-                '%world_total1%' => $world_total1,
-                '%world_total2%' => $world_total2,
-                '%options%' =>      $options,
-                '%price%' =>        round(OrderTotal($chat_id), 2)
-            ];
-            $reply =  strtr($lang['success_text'], $array_str);
-            UserEvent($chat_id, 'Email');
-            OrderEdit($chat_id, 'email', $text);
-            $keyboard = $keyboard_civil_email;
-            break;
+//            switch (OrderSelect($chat_id, 'world')){
+//
+//                case "Весь мир":{
+//                    $world_total1 = '50000';
+//                    $world_total2 = '5000';
+//                    $text_europe = '';
+//                    break;
+//                }
+//                case "Вся Европа":{
+//                    $world_total1 = '30000';
+//                    $world_total2 = '3000';
+//                    $text_europe = $lang['europe_order_text'];
+//                    break;
+//                }
+//            }
+//
+//            if(OrderSelect($chat_id, 'civil') == "Да"){
+//                $options = 'Гражданская ответственность';
+//            }else{
+//                $options = 'Нет';
+//            }
+//
+//            $array_str = [
+//                '%world%' =>        OrderSelect($chat_id, 'world'),
+//                '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
+//                '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
+//                '%days_total%' =>   DaysCount($chat_id),
+//                '%text_europe%'=>   $text_europe,
+//                '%world_total1%' => $world_total1,
+//                '%world_total2%' => $world_total2,
+//                '%options%' =>      $options,
+//                '%price%' =>        round(OrderTotal($chat_id), 2)
+//            ];
+//            $reply =  strtr($lang['success_text'], $array_str);
+//            UserEvent($chat_id, 'Email');
+//            OrderEdit($chat_id, 'email', $text);
+//            $keyboard = $keyboard_civil_email;
+//            break;
         }
 
         //получаем номер телефона
@@ -660,7 +696,7 @@ if($text){
 
                 case "INN":{
                     switch ($text){
-                        case (preg_match_all('/[^A-Z0-9 ]$/', $text) ? false : true):{
+                        case (preg_match_all('/[^a-zA-Z0-9 ]$/', $text) ? false : true):{
                             $reply = $lang['phone_text'];
                             UserEvent($chat_id, 'Adress');
                             OrderEdit($chat_id, 'adress', $text);
