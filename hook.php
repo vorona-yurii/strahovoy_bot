@@ -17,54 +17,54 @@ $name = $result['message']['from']['username']; //Username
 
 $keyboard_main = [
     ["\xF0\x9F\x93\x83 Расчитать полис"],
-    ["Информация"]
+    ["\xF0\x9F\x92\xA1 Информация"]
 ];
 
 $keyboard_back = [
-    ["Информация","Назад"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 $keyboard_back_phone = [
-    [['text'=>"Отправить телефон",'request_contact'=>true]],
-    ["Информация","Назад"],
+    [['text'=>"\xE2\x98\x8E Отправить телефон",'request_contact'=>true]],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_rp = [
-    ["Весь мир", "Вся Европа"],
-    ["Информация","Назад"],
+    ["\xF0\x9F\x8C\x8E Весь мир", "\xF0\x9F\x8C\x8D Вся Европа"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_work_recreation = [
-    ["Активный отдых"],
-    ["Отдых", "Работа"],
-    ["Информация","Назад"],
+    ["\xF0\x9F\x8F\x83 Активный отдых"],
+    ["\xE2\x9B\x85 Отдых", "\xF0\x9F\x92\xAA Работа"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_tarif = [
-    ["Стандарт", "Расширенный"],
-    ["Путешествие на авто"],
-    ["Информация","Назад"],
+    ["\xF0\x9F\x92\xAF Стандарт", "\xF0\x9F\x92\xB0 Расширенный"],
+    ["\xF0\x9F\x9A\x97 Путешествие на авто"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_civil_email = [
     ["\xF0\x9F\x93\x83 Да", "\xE2\x9D\x8C Нет"],
-    ["Информация","Назад"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_type = [
-    ["Одноразовая: (до 30 дней)", "Многоразовая: (от 60 – 365)"],
-    ["Информация","Назад"],
+    ["\x31\xE2\x83\xA3 Одноразовая: (до 30 дней)", "\x23\xE2\x83\xA3 Многоразовая: (от 60 – 365)"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
 $keyboard_manager = [
-    ["Да. Связаться с менеджером", "Нет. Оформить полис онлайн"],
-    ["Информация","Назад"],
+    ["\xF0\x9F\x93\x9E Да. Связаться с менеджером", "\xE2\x9C\x92 Нет. Оформить полис онлайн"],
+    ["\xF0\x9F\x92\xA1 Информация","\xE2\xAC\x85 Назад"],
     ["\xF0\x9F\x8F\xA0 На главную"]
 ];
 
@@ -82,7 +82,7 @@ if($text){
             break;
         }
 
-        case 'Информация':{
+        case "\xF0\x9F\x92\xA1 Информация":{
             $reply = $lang['information_text'];
             $keyboard = false;
 
@@ -96,14 +96,14 @@ if($text){
 
             break;
         }
-        case "Одноразовая: (до 30 дней)":{
+        case "\x31\xE2\x83\xA3 Одноразовая: (до 30 дней)":{
             $reply = $lang['rp_text'];
             UserEvent($chat_id, 'Type1');
             $keyboard = $keyboard_rp;
 
             break;
         }
-        case "Многоразовая: (от 60 – 365)":{
+        case "\x23\xE2\x83\xA3 Многоразовая: (от 60 – 365)":{
             $reply = $lang['rp_text'];
             UserEvent($chat_id, 'Type2');
             $keyboard = $keyboard_rp;
@@ -111,7 +111,7 @@ if($text){
             break;
         }
 
-        case "Назад":{
+        case "\xE2\xAC\x85 Назад":{
             switch (UserSelect($chat_id)){
                 case "RP": {
                     $reply = $lang['start_text'];
@@ -284,7 +284,7 @@ if($text){
             break;
         }
 
-        case "Да. Связаться с менеджером":{
+        case "\xF0\x9F\x93\x9E Да. Связаться с менеджером":{
             $reply = $lang['phone_text'];
             UserEvent($chat_id, 'Yes_Manager');
             OrderEdit($chat_id, 'name', '-');
@@ -295,7 +295,7 @@ if($text){
             break;
         }
 
-        case "Нет. Оформить полис онлайн":{
+        case "\xE2\x9C\x92 Нет. Оформить полис онлайн":{
             $reply = $lang['enter_name_text'];
             UserEvent($chat_id, 'Not_Manager');
             $keyboard = $keyboard_back;
@@ -310,7 +310,7 @@ if($text){
             break;
         }
 
-        case "Вся Европа":{
+        case "\xF0\x9F\x8C\x8D Вся Европа":{
             $reply = $lang['all_europe_text'] . $lang['dateto_text'];
             UserEvent($chat_id, 'All_Europe');
             OrderEdit($chat_id, 'world', 'Вся Европа');
@@ -318,7 +318,7 @@ if($text){
             break;
         }
 
-        case "Весь мир":{
+        case "\xF0\x9F\x8C\x8E Весь мир":{
             $reply = $lang['all_world_text'] . $lang['dateto_text'];
             UserEvent($chat_id, 'All_World');
             OrderEdit($chat_id, 'world', 'Весь мир');
@@ -451,7 +451,7 @@ if($text){
             break;
         }
 
-        case 'Отдых':{
+        case "\xE2\x9B\x85 Отдых":{
             $reply = $lang['tarif_text'];
             UserEvent($chat_id, 'Recreation');
             OrderEdit($chat_id, 'work_recreation', 'Отдых');
@@ -460,7 +460,7 @@ if($text){
             break;
         }
 
-        case "Активный отдых":{
+        case "\xF0\x9F\x8F\x83 Активный отдых":{
             $reply = $lang['tarif_text'];
             UserEvent($chat_id, 'Active_Recreation');
             OrderEdit($chat_id, 'work_recreation', 'Активный отдых');
@@ -469,7 +469,7 @@ if($text){
             break;
         }
 
-        case 'Работа':{
+        case "\xF0\x9F\x92\xAA Работа":{
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Work');
             OrderEdit($chat_id, 'work_recreation', 'Работа');
@@ -480,7 +480,7 @@ if($text){
             break;
         }
 
-        case 'Стандарт':{
+        case "\xF0\x9F\x92\xAF Стандарт":{
 
             switch (OrderSelect($chat_id, 'work_recreation')){
 
@@ -503,7 +503,7 @@ if($text){
             break;
         }
 
-        case 'Расширенный':{
+        case "\xF0\x9F\x92\xB0 Расширенный":{
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Extended_tarif');
             OrderEdit($chat_id, 'tarif', 'Расширенный');
@@ -513,7 +513,7 @@ if($text){
             break;
         }
 
-        case 'Путешествие на авто':{
+        case "\xF0\x9F\x9A\x97 Путешествие на авто":{
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Car_tarif');
             OrderEdit($chat_id, 'tarif', 'Путешествие на авто');
