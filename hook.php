@@ -431,11 +431,10 @@ if($text){
         }
         //получаем емейл
         case (preg_match_all('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]i+)*\.[a-z]{2,6}$/i', $text) ? true : false):{
-//            $array_str = [
-//                '%link%' => LinkGenFondy($chat_id)
-//            ];
-//            $reply =  strtr($lang['thank_text'], $array_str);
-            $reply =  LinkGenFondy($chat_id);
+            $array_str = [
+                '%link%' => LinkGenFondy($chat_id)
+            ];
+            $reply =  strtr($lang['thank_text'], $array_str);
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
             $keyboard = $keyboard_back;
