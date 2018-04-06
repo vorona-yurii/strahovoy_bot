@@ -200,17 +200,32 @@ if($text){
                     break;
                 }
 
-                case "Yes_order":{
+                case "Email":{
+                    $reply = $lang['email_text'];
+                    UserEvent($chat_id, 'Phone');
+                    $keyboard = $keyboard_back;
+                    break;
+                }
+                case "Phone":{
+                    $reply = $lang['phone_text'];
+                    UserEvent($chat_id, 'Yes_Manager');
+                    $keyboard = $keyboard_back_phone;
+                    break;
+                }
+                case "Yes_Manager":
+                case "Not_Manager":{
                     switch (OrderSelect($chat_id, 'world')){
 
                         case "Весь мир":{
                             $world_total1 = '50000';
                             $world_total2 = '5000';
+                            $text_europe = '';
                             break;
                         }
                         case "Вся Европа":{
                             $world_total1 = '30000';
                             $world_total2 = '3000';
+                            $text_europe = $lang['europe_order_text'];
                             break;
                         }
                     }
@@ -226,33 +241,14 @@ if($text){
                         '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
                         '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
                         '%days_total%' =>   DaysCount($chat_id),
+                        '%text_europe%'=>   $text_europe,
                         '%world_total1%' => $world_total1,
                         '%world_total2%' => $world_total2,
                         '%options%' =>      $options,
                         '%price%' =>        round(OrderTotal($chat_id), 2)
                     ];
-
                     $reply =  strtr($lang['success_text'], $array_str);
-                    UserEvent($chat_id, 'Success');
-                    $keyboard = $keyboard_manager;
-                    break;
-                }
 
-                case "Email":{
-                    $reply = $lang['email_text'];
-                    UserEvent($chat_id, 'Phone');
-                    $keyboard = $keyboard_back;
-                    break;
-                }
-                case "Phone":{
-                    $reply = $lang['phone_text'];
-                    UserEvent($chat_id, 'Yes_Manager');
-                    $keyboard = $keyboard_back_phone;
-                    break;
-                }
-                case "Yes_Manager":
-                case "Not_Manager":{
-                    $reply = $lang['manager_text'];
                     UserEvent($chat_id, 'Success');
                     $keyboard = $keyboard_manager;
                     break;
@@ -385,9 +381,6 @@ if($text){
                     $arr = getDiffYear($text, 'Now', 80, $lang);
 
                     if($arr['return']){
-                        //$reply = $lang['manager_text'];
-
-                        //$keyboard = $keyboard_manager;
                         switch (OrderSelect($chat_id, 'world')){
 
                             case "Весь мир":{
@@ -438,44 +431,6 @@ if($text){
         }
         //получаем емейл
         case (preg_match_all('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]i+)*\.[a-z]{2,6}$/i', $text) ? true : false):{
-//            switch (OrderSelect($chat_id, 'world')){
-//
-//                case "Весь мир":{
-//                    $world_total1 = '50000';
-//                    $world_total2 = '5000';
-//                    $text_europe = '';
-//                    break;
-//                }
-//                case "Вся Европа":{
-//                    $world_total1 = '30000';
-//                    $world_total2 = '3000';
-//                    $text_europe = $lang['europe_order_text'];
-//                    break;
-//                }
-//            }
-//
-//            if(OrderSelect($chat_id, 'civil') == "Да"){
-//                $options = 'Гражданская ответственность';
-//            }else{
-//                $options = 'Нет';
-//            }
-//
-//            $array_str = [
-//                '%world%' =>        OrderSelect($chat_id, 'world'),
-//                '%date_to%' =>      OrderSelect($chat_id, 'date_to'),
-//                '%date_back%' =>    OrderSelect($chat_id, 'date_back'),
-//                '%days_total%' =>   DaysCount($chat_id),
-//                '%text_europe%'=>   $text_europe,
-//                '%world_total1%' => $world_total1,
-//                '%world_total2%' => $world_total2,
-//                '%options%' =>      $options,
-//                '%price%' =>        round(OrderTotal($chat_id), 2)
-//            ];
-//            $reply =  strtr($lang['success_text'], $array_str);
-//            UserEvent($chat_id, 'Email');
-//            OrderEdit($chat_id, 'email', $text);
-//            $keyboard = $keyboard_civil_email;
-//            break;
             $array_str = [
                 '%link%' => LinkGenFondy($chat_id)
             ];
@@ -577,20 +532,6 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
-
-//                case "Success":{
-//                    $reply = $lang['manager_text'];
-//                    UserEvent($chat_id, 'Yes_order');
-//                    $keyboard = $keyboard_manager;
-////                case "Email":{
-////                    $array_str = [
-////                        '%link%' => LinkGenFondy($chat_id)
-////                    ];
-////                    $reply =  strtr($lang['thank_text'], $array_str);
-////                    UserEvent($chat_id, 'Yes_order');
-////                    $keyboard = $keyboard_back;
-//                    break;
-//                }
             }
             break;
         }
@@ -604,14 +545,6 @@ if($text){
                     $keyboard = $keyboard_back;
                     break;
                 }
-
-//                case "Success":{
-////                case "Email":{
-//                    $reply = $lang['start_text'];
-//                    UserEvent($chat_id, 'Null');
-//                    $keyboard = $keyboard_main;
-//                    break;
-//                }
             }
             break;
         }
