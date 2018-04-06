@@ -412,7 +412,7 @@ if($text){
                             '%world_total1%' => $world_total1,
                             '%world_total2%' => $world_total2,
                             '%options%' =>      $options,
-                            '%price%' =>        round(OrderTotal($chat_id), 2)
+                            '%price%' =>        round(OrderTotal($chat_id))
                         ];
                         $reply =  strtr($lang['success_text'], $array_str);
                         UserEvent($chat_id, 'Success');
@@ -482,23 +482,10 @@ if($text){
 
         case "\xF0\x9F\x92\xAF Стандарт":{
 
-            switch (OrderSelect($chat_id, 'work_recreation')){
-
-                case "Активный отдых":{
-                    $reply = $lang['civil_text'];
-                    UserEvent($chat_id, 'Standart_tarif');
-                    OrderEdit($chat_id, 'tarif', 'Стандарт');
-                    $keyboard = $keyboard_civil_email;
-                    break;
-                }
-                case "Отдых":{
-                    $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Standart_tarif_recretion');
-                    OrderEdit($chat_id, 'civil', '-');
-                    $keyboard = $keyboard_back;
-                    break;
-                }
-            }
+            $reply = $lang['date_bith_text'];
+            UserEvent($chat_id, 'Standart_tarif');
+            OrderEdit($chat_id, 'civil', '-');
+            $keyboard = $keyboard_back;
 
             break;
         }
@@ -523,31 +510,31 @@ if($text){
             break;
         }
 
-        case "\xF0\x9F\x93\x83 Да":{
-            switch (UserSelect($chat_id)){
-                case 'Standart_tarif': {
-                    $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Yes_civil');
-                    OrderEdit($chat_id, 'civil', 'Да');
-                    $keyboard = $keyboard_back;
-                    break;
-                }
-            }
-            break;
-        }
-
-        case "\xE2\x9D\x8C Нет":{
-            switch (UserSelect($chat_id)){
-                case 'Standart_tarif': {
-                    $reply = $lang['date_bith_text'];
-                    UserEvent($chat_id, 'Not_civil');
-                    OrderEdit($chat_id, 'civil', 'Нет');
-                    $keyboard = $keyboard_back;
-                    break;
-                }
-            }
-            break;
-        }
+//        case "\xF0\x9F\x93\x83 Да":{
+//            switch (UserSelect($chat_id)){
+//                case 'Standart_tarif': {
+//                    $reply = $lang['date_bith_text'];
+//                    UserEvent($chat_id, 'Yes_civil');
+//                    OrderEdit($chat_id, 'civil', 'Да');
+//                    $keyboard = $keyboard_back;
+//                    break;
+//                }
+//            }
+//            break;
+//        }
+//
+//        case "\xE2\x9D\x8C Нет":{
+//            switch (UserSelect($chat_id)){
+//                case 'Standart_tarif': {
+//                    $reply = $lang['date_bith_text'];
+//                    UserEvent($chat_id, 'Not_civil');
+//                    OrderEdit($chat_id, 'civil', 'Нет');
+//                    $keyboard = $keyboard_back;
+//                    break;
+//                }
+//            }
+//            break;
+//        }
         default:{
             switch (UserSelect($chat_id)){
                 case "All_World":

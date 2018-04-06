@@ -486,7 +486,7 @@ function LinkGenFondy($user_id)
     $password = getSettings('key_payment');
     $password = $password['value'];
 
-    $total_price = round(OrderSelect($user_id, 'total_price'), 2);
+    $total_price = round(OrderSelect($user_id, 'total_price'));
     $order_id = "ID".OrderSelect($user_id, 'id');
 
     $sender_email = OrderSelect($user_id, 'email');
