@@ -137,7 +137,7 @@ function OrderFull($user_id)
  */
 function OrderFullUser()
 {
-    $result =  dbQuery("SELECT * FROM `orders`")->fetchAll( PDO::FETCH_ASSOC );
+    $result =  dbQuery("SELECT * FROM `users`")->fetchAll( PDO::FETCH_ASSOC );
 
     return $result;
 }
