@@ -376,7 +376,7 @@ if($text){
                 case "Car_tarif":
                 case "Not_civil":
                 case "Yes_civil":
-                case "Standart_tarif_recretion":{
+                case "Standart_tarif":{
 
                     $arr = getDiffYear($text, 'Now', 80, $lang);
 
@@ -554,7 +554,7 @@ if($text){
                 case "Car_tarif":
                 case "Not_civil":
                 case "Yes_civil":
-                case "Standart_tarif_recretion":{
+                case "Standart_tarif":{
                     $reply = $lang['error_birthday_little_text'];
                     $keyboard = false;
                     break;
