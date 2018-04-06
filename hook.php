@@ -578,19 +578,19 @@ if($text){
                     break;
                 }
 
-                case "Success":{
-                    $reply = $lang['manager_text'];
-                    UserEvent($chat_id, 'Yes_order');
-                    $keyboard = $keyboard_manager;
-//                case "Email":{
-//                    $array_str = [
-//                        '%link%' => LinkGenFondy($chat_id)
-//                    ];
-//                    $reply =  strtr($lang['thank_text'], $array_str);
+//                case "Success":{
+//                    $reply = $lang['manager_text'];
 //                    UserEvent($chat_id, 'Yes_order');
-//                    $keyboard = $keyboard_back;
-                    break;
-                }
+//                    $keyboard = $keyboard_manager;
+////                case "Email":{
+////                    $array_str = [
+////                        '%link%' => LinkGenFondy($chat_id)
+////                    ];
+////                    $reply =  strtr($lang['thank_text'], $array_str);
+////                    UserEvent($chat_id, 'Yes_order');
+////                    $keyboard = $keyboard_back;
+//                    break;
+//                }
             }
             break;
         }
@@ -605,13 +605,13 @@ if($text){
                     break;
                 }
 
-                case "Success":{
-//                case "Email":{
-                    $reply = $lang['start_text'];
-                    UserEvent($chat_id, 'Null');
-                    $keyboard = $keyboard_main;
-                    break;
-                }
+//                case "Success":{
+////                case "Email":{
+//                    $reply = $lang['start_text'];
+//                    UserEvent($chat_id, 'Null');
+//                    $keyboard = $keyboard_main;
+//                    break;
+//                }
             }
             break;
         }
