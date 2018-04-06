@@ -505,8 +505,8 @@ function LinkGenFondy($user_id)
 
     $signature = getSignature($merchant_id, $password, $params);
 
-    $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","signature":"'.$signature.'","sender_email":"'.$sender_email.'","currency":"UAH","fields":[{"name":"descr","value":"Оплата страхового полиса","label":"Назначение платежа","valid":"","readonly":true}],"params":{"order_id":"'.$order_id.'"},"amount":"'.$total_price.'","amount_readonly":true}';
+    $link = 'https://api.fondy.eu/api/checkout?button=';
+    $link .= urlencode('{"merchant_id":"'.$merchant_id.'","signature":"'.$signature.'","sender_email":"'.$sender_email.'","currency":"UAH","fields":[{"name":"descr","value":"Оплата страхового полиса","label":"Назначение платежа","valid":"","readonly":true}],"params":{"order_id":"'.$order_id.'"},"amount":"'.$total_price.'","amount_readonly":true}');
 
-    //return $googl->shorten($link);
-    return $link;
+    return $googl->shorten($link);
 }
