@@ -476,6 +476,13 @@ if($text){
 //            OrderEdit($chat_id, 'email', $text);
 //            $keyboard = $keyboard_civil_email;
 //            break;
+            $array_str = [
+                        '%link%' => LinkGenFondy($chat_id)
+                    ];
+            $reply =  strtr($lang['thank_text'], $array_str);
+            UserEvent($chat_id, 'Email');
+            OrderEdit($chat_id, 'email', $text);
+            $keyboard = $keyboard_back;
         }
 
         //получаем номер телефона
