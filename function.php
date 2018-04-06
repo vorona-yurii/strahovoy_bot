@@ -256,11 +256,7 @@ function OrderTotal($user_id){
     }elseif($user_years >= 75 && $user_years <= 80){
         $order_total = $order_total * 3;
     }
-
-    if($order['baggage'] == "Да"){
-        $order_total = $order_total + getCofBagFromTableExcel($days_count, $order_total);
-    }
-
+    
     if($coff = getSettings('coff')){
         $order_total = $order_total * $coff['value'];
     }
