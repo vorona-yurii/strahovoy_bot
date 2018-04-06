@@ -9,6 +9,7 @@
 require 'config.php';
 require "excel.php";
 
+require_once('Googl.class.php');
 
 $lang = [
     "start_text" => "Добрый день! Это - бот, который умеет рассчитывать туристические страховые полисы, оставлять заявки на их приобретение, присылать их в нужный момент. Бот работает с информацией компании «Европейское туристическое страхование (ERV).",
@@ -481,6 +482,8 @@ function getSignature( $merchant_id , $password , $params = array() ){
  */
 function LinkGenFondy($user_id)
 {
+    $googl = new Googl(GOOGL_API);
+
     $merchant_id = getSettings('merchant_id');
     $merchant_id = $merchant_id['value'];
 
@@ -504,6 +507,5 @@ function LinkGenFondy($user_id)
 
     $link = 'https://api.fondy.eu/api/checkout?button={"merchant_id":"'.$merchant_id.'","signature":"'.$signature.'","sender_email":"'.$sender_email.'","currency":"UAH","fields":[{"name":"descr","value":"Оплата страхового полиса","label":"Назначение платежа","valid":"","readonly":true}],"params":{"order_id":"'.$order_id.'"},"amount":"'.$total_price.'","amount_readonly":true}';
 
-    //return file_get_contents("https://clck.ru/--?url=".$link);
-    return $link;
+    return $googl->shorten($link);
 }
