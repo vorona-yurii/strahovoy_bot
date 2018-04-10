@@ -484,6 +484,7 @@ if($text){
 
             $reply = $lang['date_bith_text'];
             UserEvent($chat_id, 'Standart_tarif');
+            OrderEdit($chat_id, 'tarif', 'Стандарт');
             OrderEdit($chat_id, 'civil', '-');
             $keyboard = $keyboard_back;
 
