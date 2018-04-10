@@ -231,7 +231,7 @@ function OrderTotal($user_id){
 
     $sheetname = '';
     $civil = false;
-    $valut = 'USD';
+    $valut = 'EUR';
 
     if($order['world'] == "Вся Европа"){
         $sheetname = '30000';
