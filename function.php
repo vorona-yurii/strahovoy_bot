@@ -241,12 +241,6 @@ function OrderTotal($user_id){
         $valut = 'USD';
     }
 
-    if($order['civil'] == "Да"){
-        $civil = true;
-    }elseif($order['civil'] == "Нет" || $order['civil'] == "-"){
-        $civil = false;
-    }
-
     $coefficient = getCofFromTableExcel($sheetname, $days_count, $civil);
 
     $order_total = $coefficient;
