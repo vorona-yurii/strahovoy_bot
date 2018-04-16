@@ -458,10 +458,7 @@ function setSettings($key, $value){
         dbQuery("INSERT INTO `settings` (`key`, `value`) VALUES ('" . $key . "', '" . $value . "')");
     }else {
         $sql = "UPDATE `settings` SET";
-
-        if($value){
-            $sql .= "`value` = '".$value."'";
-        }
+        $sql .= "`value` = '".$value."'";
         $sql .= " WHERE `key` = '". $key ."'";
 
         dbQuery($sql);
