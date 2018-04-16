@@ -114,7 +114,7 @@ if(isset($_GET['delete'])){
                                         <td><?=$user['date_back']?></td>
                                         <td><?=$user['work_recreation']?></td>
                                         <td><?=$user['tarif']?></td>
-                                        <td><?=round($user['total_price'])?> грн</td>
+                                        <td><?=ceil($user['total_price'])?> грн</td>
                                         <td><a class="del-btn" href="index.php?delete=<?=$user['id']?>">Удалить</a></td>
                                     </tr>
                                     <?php } ?>

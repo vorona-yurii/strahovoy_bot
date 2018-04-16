@@ -245,7 +245,7 @@ if($text){
                         '%world_total1%' => $world_total1,
                         '%world_total2%' => $world_total2,
                         '%options%' =>      $options,
-                        '%price%' =>        round(OrderTotal($chat_id), 2)
+                        '%price%' =>        ceil(OrderTotal($chat_id), 2)
                     ];
                     $reply =  strtr($lang['success_text'], $array_str);
 
@@ -412,7 +412,7 @@ if($text){
                             '%world_total1%' => $world_total1,
                             '%world_total2%' => $world_total2,
                             '%options%' =>      $options,
-                            '%price%' =>        round(OrderTotal($chat_id))
+                            '%price%' =>        ceil(OrderTotal($chat_id))
                         ];
                         $reply =  strtr($lang['success_text'], $array_str);
                         UserEvent($chat_id, 'Success');
@@ -431,10 +431,15 @@ if($text){
         }
         //получаем емейл
         case (preg_match_all('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]i+)*\.[a-z]{2,6}$/i', $text) ? true : false):{
-            $array_str = [
-                '%link%' => LinkGenFondy($chat_id)
-            ];
-            $reply =  strtr($lang['thank_text'], $array_str);
+            $orderUserName = OrderSelect($chat_id, 'name');
+            if($orderUserName != '-'){
+                $array_str = [
+                    '%link%' => LinkGenFondy($chat_id)
+                ];
+                $reply =  strtr($lang['thank_text'], $array_str);
+            }else{
+                $reply =  $lang['thank_text2'];
+            }
             UserEvent($chat_id, 'Email');
             OrderEdit($chat_id, 'email', $text);
             $keyboard = $keyboard_back;
