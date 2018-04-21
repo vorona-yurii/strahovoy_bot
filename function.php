@@ -286,9 +286,9 @@ function OrderTotal($user_id){
     $order_total = $order_total + $order_total * $coff;
 
     if($order['tarif'] == "Расширенный"){
-        $order_total = $order_total + 1.2;
+        $order_total = $order_total + $order_total* 1.2;
     }elseif($order['tarif'] == "Путешествие на авто"){
-        $order_total = $order_total + 1.6;
+        $order_total = $order_total + $order_total * 1.6;
     }
 
     $order_total = $order_total * getApiNBU($valut); //курс валюты умножаем на окончательную сумму
