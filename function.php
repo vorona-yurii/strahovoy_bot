@@ -261,35 +261,33 @@ function OrderTotal($user_id){
     }
 
     if($order['work_recreation'] == "Активный отдых"){
-        $coff += 1.5;
+        $coff = $coff + 1.5;
 
     }elseif($order['work_recreation'] == "Работа"){
-        $coff += 1;
+        $coff = $coff + 1;
     }
 
     if($user_years >= 65 && $user_years < 71){
-        $coff += 1;
+        $coff = $coff + 1;
     }elseif($user_years >= 71 && $user_years < 75){
-        $coff += 2;
+        $coff = $coff + 2;
     }elseif($user_years >= 75 && $user_years <= 80){
-        $coff += 3;
+        $coff = $coff + 3;
     }
 
     if($order['world'] == "Весь мир"){
-        $coff += 1;
+        $coff = $coff + 1;
     }
 
     if($order['tarif'] == "Расширенный"){
-        $coff += 1.2;
+        $coff = $coff + 1.2;
     }elseif($order['tarif'] == "Путешествие на авто"){
-        $coff += 1.6;
+        $coff = $coff + 1.6;
     }
 
-    if($coff = getSettings('coff')){
-        $coff += $coff['value']; // обавляем общий коэффициент
+    if($coff_admin = getSettings('coff')){
+        $coff = $coff + $coff_admin['value']; // обавляем общий коэффициент
     }
-
-    return $coff;
 
     $order_total = $order_total * $coff;
     $order_total = $order_total * $coefficient;
