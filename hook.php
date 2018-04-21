@@ -225,12 +225,14 @@ if($text){
                             $world_total1 = '50000';
                             $world_total2 = '5000';
                             $text_europe = '';
+                            $valut = '$';
                             break;
                         }
                         case "Вся Европа":{
                             $world_total1 = '30000';
                             $world_total2 = '3000';
                             $text_europe = $lang['europe_order_text'];
+                            $valut = '€';
                             break;
                         }
                     }
@@ -249,6 +251,7 @@ if($text){
                         '%text_europe%'=>   $text_europe,
                         '%world_total1%' => $world_total1,
                         '%world_total2%' => $world_total2,
+                        '%valut%' =>        $valut,
                         '%options%' =>      $options,
                         '%price%' =>        ceil(OrderTotal($chat_id), 2)
                     ];
@@ -392,12 +395,14 @@ if($text){
                                 $world_total1 = '50000';
                                 $world_total2 = '5000';
                                 $text_europe = '';
+                                $valut = '$';
                                 break;
                             }
                             case "Вся Европа":{
                                 $world_total1 = '30000';
                                 $world_total2 = '3000';
                                 $text_europe = $lang['europe_order_text'];
+                                $valut = '€';
                                 break;
                             }
                         }
@@ -416,6 +421,7 @@ if($text){
                             '%text_europe%'=>   $text_europe,
                             '%world_total1%' => $world_total1,
                             '%world_total2%' => $world_total2,
+                            '%valut%' =>        $valut,
                             '%options%' =>      $options,
                             '%price%' =>        ceil(OrderTotal($chat_id))
                         ];
@@ -520,32 +526,6 @@ if($text){
 
             break;
         }
-
-//        case "\xF0\x9F\x93\x83 Да":{
-//            switch (UserSelect($chat_id)){
-//                case 'Standart_tarif': {
-//                    $reply = $lang['date_bith_text'];
-//                    UserEvent($chat_id, 'Yes_civil');
-//                    OrderEdit($chat_id, 'civil', 'Да');
-//                    $keyboard = $keyboard_back;
-//                    break;
-//                }
-//            }
-//            break;
-//        }
-//
-//        case "\xE2\x9D\x8C Нет":{
-//            switch (UserSelect($chat_id)){
-//                case 'Standart_tarif': {
-//                    $reply = $lang['date_bith_text'];
-//                    UserEvent($chat_id, 'Not_civil');
-//                    OrderEdit($chat_id, 'civil', 'Нет');
-//                    $keyboard = $keyboard_back;
-//                    break;
-//                }
-//            }
-//            break;
-//        }
         default:{
             switch (UserSelect($chat_id)){
                 case "All_World":
