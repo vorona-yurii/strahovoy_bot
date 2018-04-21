@@ -288,8 +288,7 @@ function OrderTotal($user_id){
     if($coff_admin = getSettings('coff')){
         $coff = $coff + $coff_admin['value']; // обавляем общий коэффициент
     }
-
-    $coff = $coff * $coefficient;
+    
     $order_total = $order_total * $coff;
     $order_total = $order_total * getApiNBU($valut); //курс валюты умножаем на окончательную сумму
 
