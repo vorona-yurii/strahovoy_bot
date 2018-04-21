@@ -15,6 +15,11 @@ $phone_number = $result['message']['contact']['phone_number'];
 $chat_id = $result['message']['chat']['id']; //id user
 $name = $result['message']['from']['username']; //Username
 
+$telegram->sendChatAction([
+    'chat_id' => $chat_id,
+    'action' => 'typing'
+]);
+
 $keyboard_main = [
     ["\xF0\x9F\x93\x83 Расчитать полис"],
     ["\xF0\x9F\x92\xA1 Информация"]
@@ -661,11 +666,6 @@ if($text){
             break;
         }
     }
-
-    $telegram->sendChatAction([
-        'chat_id' => $chat_id,
-        'action' => 'typing'
-    ]);
 
     //отправка смс
     if($keyboard){
