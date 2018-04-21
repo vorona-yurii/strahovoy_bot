@@ -279,17 +279,18 @@ function OrderTotal($user_id){
         $coff = $coff + 1;
     }
 
-    if($order['tarif'] == "Расширенный"){
-        $coff = $coff + 1.2;
-    }elseif($order['tarif'] == "Путешествие на авто"){
-        $coff = $coff + 1.6;
-    }
-
     if($coff_admin = getSettings('coff')){
         $coff = $coff + $coff_admin['value']; // обавляем общий коэффициент
     }
 
     $order_total = $order_total + $order_total * $coff;
+
+    if($order['tarif'] == "Расширенный"){
+        $order_total = $order_total + 1.2;
+    }elseif($order['tarif'] == "Путешествие на авто"){
+        $order_total = $order_total + 1.6;
+    }
+
     $order_total = $order_total * getApiNBU($valut); //курс валюты умножаем на окончательную сумму
 
     OrderEdit($user_id, 'total_price', $order_total);
