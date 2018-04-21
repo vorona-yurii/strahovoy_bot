@@ -662,6 +662,11 @@ if($text){
         }
     }
 
+    $telegram->sendChatAction([
+        'chat_id' => $chat_id,
+        'action' => 'typing'
+    ]);
+
     //отправка смс
     if($keyboard){
         $reply_markup = $telegram->replyKeyboardMarkup([
