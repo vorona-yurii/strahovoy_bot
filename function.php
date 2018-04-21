@@ -245,35 +245,9 @@ function OrderTotal($user_id){
     $coefficient = getCofFromTableExcel($sheetname, $days_count, $civil);
     $order_total = $coefficient;
 
-    if($days_count <= 30){
-        if($order['work_recreation'] == "Активный отдых"){
-            $order_total = $order_total + $order_total * 1.5;
-        }elseif($order['work_recreation'] == "Работа"){
-            $order_total = $order_total + $order_total * 1;
-        }
+    $coff = 0;
 
-        if($user_years >= 65 && $user_years < 71){
-            $order_total = $order_total + $order_total * 1;
-        }elseif($user_years >= 71 && $user_years < 75){
-            $order_total = $order_total + $order_total * 2;
-        }elseif($user_years >= 75 && $user_years <= 80){
-            $order_total = $order_total + $order_total * 3;
-        }
-
-        if($order['world'] == "Весь мир"){
-            $order_total = $order_total + $order_total * 1;
-        }
-
-        if($order['tarif'] == "Расширенный"){
-            $order_total = $order_total + $order_total * 1.2;
-        }elseif($order['tarif'] == "Путешествие на авто"){
-            $order_total = $order_total + $order_total * 1.6;
-        }
-
-        if($coff = getSettings('coff')){
-            $order_total = $order_total + $order_total * $coff['value']; // обавляем общий коэффициент
-        }
-    }elseif($days_count > 30){
+    if($days_count > 30){
         if($days_count > 30 && $days_count <= 60){
             $order_total = $order_total / 60;
         }elseif($days_count > 60 && $days_count <= 90){
@@ -284,38 +258,39 @@ function OrderTotal($user_id){
             $order_total = $order_total / 365;
         }
         $order_total = $order_total * $days_count;
-
-        if($order['work_recreation'] == "Активный отдых"){
-            $order_total = $order_total + $order_total * 1.5;
-        }elseif($order['work_recreation'] == "Работа"){
-            $order_total = $order_total + $order_total * 1;
-        }
-
-        if($user_years >= 65 && $user_years < 71){
-            $order_total = $order_total + $order_total * 1;
-        }elseif($user_years >= 71 && $user_years < 75){
-            $order_total = $order_total + $order_total * 2;
-        }elseif($user_years >= 75 && $user_years <= 80){
-            $order_total = $order_total + $order_total * 3;
-        }
-
-        if($order['world'] == "Весь мир"){
-            $order_total = $order_total + $order_total * 1;
-        }
-
-        if($order['tarif'] == "Расширенный"){
-            $order_total = $order_total + $order_total * 1.2;
-        }elseif($order['tarif'] == "Путешествие на авто"){
-            $order_total = $order_total + $order_total * 1.6;
-        }
-
-        if($coff = getSettings('coff')){
-            $order_total = $order_total + $order_total * $coff['value']; // обавляем общий коэффициент
-        }
     }
 
-    $order_total = $order_total * $coefficient;
+    if($order['work_recreation'] == "Активный отдых"){
+        $coff += 1.5;
 
+    }elseif($order['work_recreation'] == "Работа"){
+        $coff += 1;
+    }
+
+    if($user_years >= 65 && $user_years < 71){
+        $coff += 1;
+    }elseif($user_years >= 71 && $user_years < 75){
+        $coff += 2;
+    }elseif($user_years >= 75 && $user_years <= 80){
+        $coff += 3;
+    }
+
+    if($order['world'] == "Весь мир"){
+        $coff += 1;
+    }
+
+    if($order['tarif'] == "Расширенный"){
+        $coff += 1.2;
+    }elseif($order['tarif'] == "Путешествие на авто"){
+        $coff += 1.6;
+    }
+
+    if($coff = getSettings('coff')){
+        $coff += $coff['value']; // обавляем общий коэффициент
+    }
+
+    $order_total = $order_total * $coff;
+    $order_total = $order_total * $coefficient;
     $order_total = $order_total * getApiNBU($valut); //курс валюты умножаем на окончательную сумму
 
     OrderEdit($user_id, 'total_price', $order_total);
