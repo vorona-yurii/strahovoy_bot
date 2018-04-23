@@ -559,7 +559,7 @@ if($text){
 
                 case "Yes_Manager":
                 case "Adress":{
-                    $reply = $lang['email_error_text'];
+                    $reply = $lang['phone_error_text'];
                     $keyboard = false;
                     break;
                 }
