@@ -557,6 +557,13 @@ if($text){
                     break;
                 }
 
+                case "Yes_Manager":
+                case "Adress":{
+                    $reply = $lang['email_error_text'];
+                    $keyboard = false;
+                    break;
+                }
+
                 case "Not_Manager":{
                     switch ($text){
                         case (preg_match_all('/[^a-zA-Z ]/', $text) ? false : true):{
